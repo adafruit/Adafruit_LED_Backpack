@@ -2,8 +2,10 @@
   This is a library for our I2C LED Backpacks
 
   Designed specifically to work with the Adafruit LED 7-Segment backpacks 
-  ----> http://www.adafruit.com/products/
-  ----> http://www.adafruit.com/products/
+  ----> http://www.adafruit.com/products/881
+  ----> http://www.adafruit.com/products/880
+  ----> http://www.adafruit.com/products/879
+  ----> http://www.adafruit.com/products/878
 
   These displays use I2C to communicate, 2 pins are required to 
   interface. There are multiple selectable I2C addresses. For backpacks
