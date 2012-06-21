@@ -30,6 +30,12 @@
 #define LED_ON 1
 #define LED_OFF 0
 
+#define LED_RED 1
+#define LED_YELLOW 2
+#define LED_GREEN 3
+ 
+
+
 #define HT16K33_BLINK_CMD 0x80
 #define HT16K33_BLINK_DISPLAYON 0x01
 #define HT16K33_BLINK_OFF 0
@@ -59,6 +65,15 @@ class Adafruit_LEDBackpack {
 class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
  public:
   Adafruit_8x8matrix(void);
+
+  void drawPixel(int16_t x, int16_t y, uint16_t color);
+
+ private:
+};
+
+class Adafruit_BicolorMatrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
+ public:
+  Adafruit_BicolorMatrix(void);
 
   void drawPixel(int16_t x, int16_t y, uint16_t color);
 
