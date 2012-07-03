@@ -98,11 +98,28 @@ Adafruit_8x8matrix::Adafruit_8x8matrix(void) {
 
 void Adafruit_8x8matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
   if ((y < 0) || (y >= 8)) return;
-  if ((x < 0) || (x >= 16)) return;
+  if ((x < 0) || (x >= 8)) return;
+
+ // check rotation, move pixel around if necessary
+  switch (getRotation()) {
+  case 1:
+    swap(x, y);
+    x = 8 - x - 1;
+    break;
+  case 2:
+    x = 8 - x - 1;
+    y = 8 - y - 1;
+    break;
+  case 3:
+    swap(x, y);
+    y = 8 - y - 1;
+    break;
+  }
 
   // wrap around the x
   x += 7;
   x %= 8;
+
 
   if (color) {
     displaybuffer[y] |= 1 << x;
@@ -119,6 +136,21 @@ Adafruit_BicolorMatrix::Adafruit_BicolorMatrix(void) {
 void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
   if ((y < 0) || (y >= 8)) return;
   if ((x < 0) || (x >= 8)) return;
+
+  switch (getRotation()) {
+  case 1:
+    swap(x, y);
+    x = 8 - x - 1;
+    break;
+  case 2:
+    x = 8 - x - 1;
+    y = 8 - y - 1;
+    break;
+  case 3:
+    swap(x, y);
+    y = 8 - y - 1;
+    break;
+  }
 
   if (color == LED_GREEN) {
     displaybuffer[y] |= 1 << x;
