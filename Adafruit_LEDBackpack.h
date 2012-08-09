@@ -45,6 +45,9 @@
 
 #define HT16K33_CMD_BRIGHTNESS 0x0E
 
+#define SEVENSEG_DIGITS 5
+
+
 // this is the raw HT16K33 controller
 class Adafruit_LEDBackpack {
  public:
@@ -110,10 +113,10 @@ class Adafruit_7segment : public Adafruit_LEDBackpack {
   
   void writeDigitRaw(uint8_t x, uint8_t bitmask);
   void writeDigitNum(uint8_t x, uint8_t num, boolean dot = false);
-  void writeDigitAlpha(uint8_t x, uint8_t num, boolean dot = false);
   void drawColon(boolean state);
-  void printNumber(unsigned long n, uint8_t base);
-  void printFloat(double number, uint8_t digits);
+  void printNumber(long, uint8_t = 2);
+  void printFloat(double, uint8_t = 2, uint8_t = DEC);
+  void printError(void);
 
  private:
   uint8_t position;
