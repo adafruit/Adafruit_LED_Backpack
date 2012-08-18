@@ -89,8 +89,8 @@ void Adafruit_LEDBackpack::clear(void) {
   }
 }
 
-Adafruit_8x8matrix::Adafruit_8x8matrix(void) {
-  constructor(8, 8);
+Adafruit_8x8matrix::Adafruit_8x8matrix(void) : 
+  Adafruit_GFX(8, 8) {
 }
 
 void Adafruit_8x8matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
@@ -126,8 +126,8 @@ void Adafruit_8x8matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 }
 
 
-Adafruit_BicolorMatrix::Adafruit_BicolorMatrix(void) {
-  constructor(8, 8);
+Adafruit_BicolorMatrix::Adafruit_BicolorMatrix(void) : 
+  Adafruit_GFX(8, 8) {
 }
 
 void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
