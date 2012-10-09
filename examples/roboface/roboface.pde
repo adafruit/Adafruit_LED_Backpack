@@ -1,16 +1,19 @@
 // 'roboface' example sketch for Adafruit I2C 8x8 LED backpacks:
 //
-//  http://www.adafruit.com/products/870
-//  http://www.adafruit.com/products/871
-//  http://www.adafruit.com/products/872
-//  http://www.adafruit.com/products/959
+//  www.adafruit.com/products/870   www.adafruit.com/products/1049
+//  www.adafruit.com/products/871   www.adafruit.com/products/1050
+//  www.adafruit.com/products/872   www.adafruit.com/products/1051
+//  www.adafruit.com/products/873   www.adafruit.com/products/1052
 //
 // Requires Adafruit_LEDBackpack and Adafruit_GFX libraries.
 // For a simpler introduction, see the 'matrix8x8' example.
 //
-// Illustrates the use of multiple matrices using the 'A0' and 'A1'
-// solder pads on the back (address select 0 and 1, which add +1 and
-// +2 to the I2C address, respectively, and usable in combination).
+// This sketch demonstrates a couple of useful techniques:
+// 1) Addressing multiple matrices (using the 'A0' and 'A1' solder
+//    pads on the back to select unique I2C addresses for each).
+// 2) Displaying the same data on multiple matrices by sharing the
+//    same I2C address.
+//
 // This example uses 5 matrices at 4 addresses (two share an address)
 // to animate a face:
 //
@@ -23,11 +26,13 @@
 // (0x70).  The three matrices forming the mouth have unique addresses
 // (0x71, 0x72 and 0x73).
 //
-// The face animation as written is here semi-random; consider this a
-// stepping off point for your own project.  Maybe you could 'puppet'
-// the face using joysticks, or synchronize the lips to audio from a
-// Wave Shield.  Currently there are only six images for the mouth.
-// This is often sufficient for simple animation, as explained here:
+// The face animation as written is here semi-random; this neither
+// generates nor responds to actual sound, it's simply a visual effect
+// Consider this a stepping off point for your own project.  Maybe you
+// could 'puppet' the face using joysticks, or synchronize the lips to
+// audio from a Wave Shield (see wavface example).  Currently there are
+// only six images for the mouth.  This is often sufficient for simple
+// animation, as explained here:
 // http://www.idleworm.com/how/anm/03t/talk1.shtml
 //
 // Adafruit invests time and resources providing this open source code,
@@ -37,29 +42,29 @@
 // Written by P. Burgess for Adafruit Industries.
 // BSD license, all text above must be included in any redistribution.
 
+#include <Arduino.h>
 #include <Wire.h>
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
-#include <Arduino.h>
 
-// Because the eye matrices share the same address, only four matrix
-// objects are needed for the five displays:
+// Because the two eye matrices share the same address, only four
+// matrix objects are needed for the five displays:
 #define MATRIX_EYES         0
 #define MATRIX_MOUTH_LEFT   1
 #define MATRIX_MOUTH_MIDDLE 2
 #define MATRIX_MOUTH_RIGHT  3
-Adafruit_8x8matrix matrix[4];
+Adafruit_8x8matrix matrix[4]; // Array of Adafruit_8x8matrix objects
 
-// Rather than assigning matrix addresses in a loop, each has a spot
-// in this array.  This makes it easier if you inadvertently install
-// one or more matrices in the wrong physical position -- re-order
-// the addresses in this table and you can still refer to matrices
-// by index, no other code or wiring needs to change.
+// Rather than assigning matrix addresses sequentially in a loop, each
+// has a spot in this array.  This makes it easier if you inadvertently
+// install one or more matrices in the wrong physical position --
+// re-order the addresses in this table and you can still refer to
+// matrices by index above, no other code or wiring needs to change.
 const uint8_t matrixAddr[] = { 0x70, 0x71, 0x72, 0x73 };
 
-static uint8_t PROGMEM
-  blinkImg[][8] = { // Eye animation frames
-  { B00111100,      // Fully open eye
+static uint8_t PROGMEM // Bitmaps are stored in program memory
+  blinkImg[][8] = {    // Eye animation frames
+  { B00111100,         // Fully open eye
     B01111110,
     B11111111,
     B11111111,
@@ -91,7 +96,7 @@ static uint8_t PROGMEM
     B01111110,
     B00011000,
     B00000000 },
-  { B00000000,      // Fully closed eye
+  { B00000000,         // Fully closed eye
     B00000000,
     B00000000,
     B00000000,
@@ -149,6 +154,18 @@ static uint8_t PROGMEM
     B00000000, B00000000, B00000000,
     B00000000, B00000000, B00000000 } };
 
+uint8_t
+  blinkIndex[] = { 1, 2, 3, 4, 3, 2, 1 }, // Blink bitmap sequence
+  blinkCountdown = 100, // Countdown to next blink (in frames)
+  gazeCountdown  =  75, // Countdown to next eye movement
+  gazeFrames     =  50, // Duration of eye movement (smaller = faster)
+  mouthPos       =   0, // Current image number for mouth
+  mouthCountdown =  10; // Countdown to next mouth change
+int8_t
+  eyeX = 3, eyeY = 3,   // Current eye position
+  newX = 3, newY = 3,   // Next eye position
+  dX   = 0, dY   = 0;   // Distance from prior to new position
+
 void setup() {
 
   // Seed random number generator from an unused analog input:
@@ -161,30 +178,27 @@ void setup() {
   }
 }
 
-uint8_t blinkIndex[] = { 1, 2, 3, 4, 3, 2, 1 };
-
-uint8_t
-  mouthPos       =   0, // Current image number for mouth
-  mouthCountdown =  10, // Countdown to next mouth change (in frames)
-  blinkCountdown = 100, // Countdown to next blink
-  gazeCountdown  =  75, // Countdown to next eye movement
-  gazeFrames     =  50; // Duration of eye movement
-int8_t
-  eyeX = 3, eyeY = 3,   // Current eye position
-  newX = 3, newY = 3,   // Next eye position
-  dX   = 0, dY   = 0;   // Difference
 
 void loop() {
 
+  // Draw eyeball in current state of blinkyness (no pupil).  Note that
+  // only one eye needs to be drawn.  Because the two eye matrices share
+  // the same address, the same data will be received by both.
   matrix[MATRIX_EYES].clear();
-
-  // Draw eyeball in current state of blinkyness (no pupul)
-  matrix[MATRIX_EYES].drawBitmap(0, 0, blinkImg[
-    (blinkCountdown < sizeof(blinkIndex)) ? blinkIndex[blinkCountdown] : 0],
-    8, 8, LED_ON);
+  // When counting down to the next blink, show the eye in the fully-
+  // open state.  On the last few counts (during the blink), look up
+  // the corresponding bitmap index.
+  matrix[MATRIX_EYES].drawBitmap(0, 0,
+    blinkImg[
+      (blinkCountdown < sizeof(blinkIndex)) ? // Currently blinking?
+      blinkIndex[blinkCountdown] :            // Yes, look up bitmap #
+      0                                       // No, show bitmap 0
+    ], 8, 8, LED_ON);
+  // Decrement blink counter.  At end, set random time for next blink.
   if(--blinkCountdown == 0) blinkCountdown = random(5, 180);
 
-  // Add pupil (a 2x2 black square) atop blinky eyeball
+  // Add a pupil (2x2 black square) atop the blinky eyeball bitmap.
+  // Periodically, the pupil moves to a new position...
   if(--gazeCountdown <= gazeFrames) {
     // Eyes are in motion - draw pupil at interim position
     matrix[MATRIX_EYES].fillRect(
@@ -193,7 +207,7 @@ void loop() {
       2, 2, LED_OFF);
     if(gazeCountdown == 0) {    // Last frame?
       eyeX = newX; eyeY = newY; // Yes.  What's new is old, then...
-      do { // Pick random positions until one is well within the eyeball
+      do { // Pick random positions until one is within the eye circle
         newX = random(7); newY = random(7);
         dX   = newX - 3;  dY   = newY - 3;
       } while((dX * dX + dY * dY) >= 10);      // Thank you Pythagoras
@@ -210,11 +224,16 @@ void loop() {
   // Draw mouth, switch to new random image periodically
   drawMouth(mouthImg[mouthPos]);
   if(--mouthCountdown == 0) {
-    mouthPos       = random(6);     // Random image
-    mouthCountdown = random(2, 10); // Random duration
+    mouthPos = random(6); // Random image
+    // If the 'neutral' position was chosen, there's a 1-in-5 chance we'll
+    // select a longer hold time.  This gives the appearance of periodic
+    // pauses in speech (e.g. between sentences, etc.).
+    mouthCountdown = ((mouthPos == 0) && (random(5) == 0)) ?
+      random(10, 40) : // Longer random duration
+      random(2, 8);    // Shorter random duration
   }
 
-  // Refresh all matrices in one quick pass
+  // Refresh all of the matrices in one quick pass
   for(uint8_t i=0; i<4; i++) matrix[i].writeDisplay();
 
   delay(20); // ~50 FPS
