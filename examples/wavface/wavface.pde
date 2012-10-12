@@ -4,7 +4,7 @@
 //  www.adafruit.com/products/870   www.adafruit.com/products/1049
 //  www.adafruit.com/products/871   www.adafruit.com/products/1050
 //  www.adafruit.com/products/872   www.adafruit.com/products/1051
-//  www.adafruit.com/products/873   www.adafruit.com/products/1052
+//  www.adafruit.com/products/959   www.adafruit.com/products/1052
 //                  www.adafruit.com/products/94
 //
 // Requires Adafruit_LEDBackpack, Adafruit_GFX libraries and WaveHC
