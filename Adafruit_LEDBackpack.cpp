@@ -261,7 +261,7 @@ void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
 
 void Adafruit_7segment::drawColon(boolean state) {
   if (state)
-    displaybuffer[2] = 0xFF;
+    displaybuffer[2] = 0x22;
   else
     displaybuffer[2] = 0;
 }
