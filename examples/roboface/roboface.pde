@@ -53,7 +53,9 @@
 #define MATRIX_MOUTH_LEFT   1
 #define MATRIX_MOUTH_MIDDLE 2
 #define MATRIX_MOUTH_RIGHT  3
-Adafruit_8x8matrix matrix[4]; // Array of Adafruit_8x8matrix objects
+Adafruit_8x8matrix matrix[4] = { // Array of Adafruit_8x8matrix objects
+  Adafruit_8x8matrix(), Adafruit_8x8matrix(),
+  Adafruit_8x8matrix(), Adafruit_8x8matrix() };
 
 // Rather than assigning matrix addresses sequentially in a loop, each
 // has a spot in this array.  This makes it easier if you inadvertently
@@ -171,13 +173,11 @@ void setup() {
   // Seed random number generator from an unused analog input:
   randomSeed(analogRead(A0));
 
-  // Instantiate and initialize each matrix object:
+  // Initialize each matrix object:
   for(uint8_t i=0; i<4; i++) {
-    matrix[i] = Adafruit_8x8matrix();
     matrix[i].begin(matrixAddr[i]);
   }
 }
-
 
 void loop() {
 
