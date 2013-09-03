@@ -62,9 +62,9 @@ Adafruit_8x8matrix matrix[4] = { // Array of Adafruit_8x8matrix objects
 // install one or more matrices in the wrong physical position --
 // re-order the addresses in this table and you can still refer to
 // matrices by index above, no other code or wiring needs to change.
-const uint8_t matrixAddr[] = { 0x70, 0x71, 0x72, 0x73 };
+static const uint8_t matrixAddr[] = { 0x70, 0x71, 0x72, 0x73 };
 
-static uint8_t PROGMEM // Bitmaps are stored in program memory
+static const uint8_t PROGMEM // Bitmaps are stored in program memory
   blinkImg[][8] = {    // Eye animation frames
   { B00111100,         // Fully open eye
     B01111110,
@@ -176,6 +176,8 @@ void setup() {
   // Initialize each matrix object:
   for(uint8_t i=0; i<4; i++) {
     matrix[i].begin(matrixAddr[i]);
+    // If using 'small' (1.2") displays vs. 'mini' (0.8"), enable this:
+    // matrix[i].setRotation(3);
   }
 }
 
@@ -240,7 +242,7 @@ void loop() {
 }
 
 // Draw mouth image across three adjacent displays
-void drawMouth(uint8_t *img) {
+void drawMouth(const uint8_t *img) {
   for(uint8_t i=0; i<3; i++) {
     matrix[MATRIX_MOUTH_LEFT + i].clear();
     matrix[MATRIX_MOUTH_LEFT + i].drawBitmap(i * -8, 0, img, 24, 8, LED_ON);
