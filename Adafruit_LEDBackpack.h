@@ -65,7 +65,7 @@ class Adafruit_LEDBackpack {
   uint16_t displaybuffer[8]; 
 
   void init(uint8_t a);
- private:
+ protected:
   uint8_t i2c_addr;
 };
 
@@ -122,6 +122,8 @@ class Adafruit_7segment : public Adafruit_LEDBackpack {
   void printFloat(double, uint8_t = 2, uint8_t = DEC);
   void printError(void);
 
+  void writeColon(void);
+    
  private:
   uint8_t position;
 };

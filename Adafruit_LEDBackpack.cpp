@@ -275,6 +275,16 @@ void Adafruit_7segment::drawColon(boolean state) {
     displaybuffer[2] = 0;
 }
 
+void Adafruit_7segment::writeColon(void) {
+    Wire.beginTransmission(i2c_addr);
+    Wire.write((uint8_t)0x04); // start at address $02
+    
+    Wire.write(displaybuffer[2] & 0xFF);
+    Wire.write(displaybuffer[2] >> 8);
+
+    Wire.endTransmission();
+}
+
 void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
   if (d > 4) return;
 
