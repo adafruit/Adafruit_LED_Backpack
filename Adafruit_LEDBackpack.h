@@ -24,7 +24,11 @@
  #include "WProgram.h"
 #endif
 
-#include "Wire.h"
+#ifdef __AVR_ATtiny85__
+ #include <TinyWireM.h>
+#else
+ #include <Wire.h>
+#endif
 #include "Adafruit_GFX.h"
 
 #define LED_ON 1

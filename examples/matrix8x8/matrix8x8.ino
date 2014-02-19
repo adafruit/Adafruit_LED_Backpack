@@ -32,7 +32,7 @@ void setup() {
   matrix.begin(0x70);  // pass in the address
 }
 
-static uint8_t PROGMEM
+static const uint8_t PROGMEM
   smile_bmp[] =
   { B00111100,
     B01000010,
