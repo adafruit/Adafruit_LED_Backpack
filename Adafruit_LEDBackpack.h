@@ -69,6 +69,16 @@ class Adafruit_LEDBackpack {
   uint8_t i2c_addr;
 };
 
+class Adafruit_24bargraph : public Adafruit_LEDBackpack {
+ public:
+  Adafruit_24bargraph(void);
+
+  void setBar(uint8_t bar, uint8_t color);
+
+ private:
+};
+
+
 class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
  public:
   Adafruit_8x8matrix(void);

@@ -94,6 +94,39 @@ void Adafruit_LEDBackpack::clear(void) {
   }
 }
 
+/******************************* 24 BARGRAPH OBJECT */
+
+Adafruit_24bargraph::Adafruit_24bargraph(void) {
+
+}
+
+void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
+  uint16_t a, c;
+ 
+  if (bar < 12)
+    c = bar / 4;
+  else 
+    c = (bar - 12) / 4;
+
+  a = bar % 4;
+  if (bar >= 12)
+    a += 4;
+    
+  //Serial.print("Ano = "); Serial.print(a); Serial.print(" Cath = "); Serial.println(c);
+  if (color == LED_RED) {
+    displaybuffer[c] |= _BV(a) ;
+  } else if (color == LED_YELLOW) {
+    displaybuffer[c] |= _BV(a) | _BV(a+8);
+  } else if (color == LED_OFF) {
+    displaybuffer[c] &= ~_BV(a) & ~_BV(a+8);
+  } else if (color == LED_GREEN) {
+    displaybuffer[c] |= _BV(a+8) ;
+  } 
+}
+
+
+/******************************* 8x8 MATRIX OBJECT */
+
 Adafruit_8x8matrix::Adafruit_8x8matrix(void) : Adafruit_GFX(8, 8) {
 }
 
@@ -129,6 +162,7 @@ void Adafruit_8x8matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
   }
 }
 
+/******************************* 8x8 BICOLOR MATRIX OBJECT */
 
 Adafruit_BicolorMatrix::Adafruit_BicolorMatrix(void) : Adafruit_GFX(8, 8) {
 }
@@ -162,6 +196,8 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
     displaybuffer[y] &= ~(1 << x) & ~(1 << (x+8));
   }
 }
+
+/******************************* 7 SEGMENT OBJECT */
 
 Adafruit_7segment::Adafruit_7segment(void) {
   position = 0;
