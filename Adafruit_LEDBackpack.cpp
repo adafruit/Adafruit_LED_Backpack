@@ -27,7 +27,11 @@
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
 
-static const uint8_t numbertable[] = { 
+#ifndef _BV
+  #define _BV(bit) (1<<(bit))
+#endif
+
+static const uint8_t numbertable[] = {
 	0x3F, /* 0 */
 	0x06, /* 1 */
 	0x5B, /* 2 */

@@ -23,6 +23,11 @@
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
 
+#ifndef _BV
+  #define _BV(bit) (1<<(bit))
+#endif
+
+
 Adafruit_LEDBackpack matrix = Adafruit_LEDBackpack();
 
 uint8_t counter = 0;
