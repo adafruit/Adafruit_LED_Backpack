@@ -144,7 +144,7 @@ static const uint16_t alphafonttable[] PROGMEM =  {
 0b0001010100000000, // Y
 0b0000110000001001, // Z
 0b0000000000111001, // [
-0b0010000100000000, // \
+0b0010000100000000, // 
 0b0000000000001111, // ]
 0b0000110000000011, // ^
 0b0000000000001000, // _
@@ -242,17 +242,14 @@ void Adafruit_AlphaNum4::writeDigitRaw(uint8_t n, uint16_t bitmask) {
 
 void Adafruit_AlphaNum4::writeDigitAscii(uint8_t n, uint8_t a,  boolean d) {
   uint16_t font = pgm_read_word(alphafonttable+a);
-  //boolean lbit = font >> 11;
-  //boolean nbit = font >> 13;
-  //font &= ~_BV(11);
-  //if (nbit)  font |= _BV(11);
-  //font &= ~_BV(13);
-  //if (lbit)  font |= _BV(13);
 
   displaybuffer[n] = font;
 
-  Serial.print("'"); Serial.write(a);
+  /*
+  Serial.print(a, DEC);
+  Serial.print(" / '"); Serial.write(a);
   Serial.print("' = 0x"); Serial.println(font, HEX);
+  */
 
   if (d) displaybuffer[n] |= (1<<15);
 }
