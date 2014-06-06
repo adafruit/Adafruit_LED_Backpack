@@ -69,6 +69,18 @@ class Adafruit_LEDBackpack {
   uint8_t i2c_addr;
 };
 
+class Adafruit_AlphaNum4 : public Adafruit_LEDBackpack {
+ public:
+  Adafruit_AlphaNum4(void);
+
+  void writeDigitRaw(uint8_t n, uint16_t bitmask);
+  void writeDigitAscii(uint8_t n, uint8_t ascii, boolean dot = false);
+
+ private:
+
+
+};
+
 class Adafruit_24bargraph : public Adafruit_LEDBackpack {
  public:
   Adafruit_24bargraph(void);
