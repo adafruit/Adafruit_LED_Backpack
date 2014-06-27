@@ -555,7 +555,7 @@ void Adafruit_7segment::printFloat(double n, uint8_t fracDigits, uint8_t base)
     
     if (displayNumber)  //if displayNumber is not 0
     {
-      for(uint8_t i = 0; displayNumber; ++i) {
+      for(uint8_t i = 0; displayNumber || i <= fracDigits; ++i) {
         boolean displayDecimal = (fracDigits != 0 && i == fracDigits);
         writeDigitNum(displayPos--, displayNumber % base, displayDecimal);
         if(displayPos == 2) writeDigitRaw(displayPos--, 0x00);
