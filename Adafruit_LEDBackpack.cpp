@@ -274,13 +274,21 @@ void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
     
   //Serial.print("Ano = "); Serial.print(a); Serial.print(" Cath = "); Serial.println(c);
   if (color == LED_RED) {
-    displaybuffer[c] |= _BV(a) ;
+    // Turn on red LED.
+    displaybuffer[c] |= _BV(a);
+    // Turn off green LED.
+    displaybuffer[c] &= ~_BV(a+8);
   } else if (color == LED_YELLOW) {
+    // Turn on red and green LED.
     displaybuffer[c] |= _BV(a) | _BV(a+8);
   } else if (color == LED_OFF) {
+    // Turn off red and green LED.
     displaybuffer[c] &= ~_BV(a) & ~_BV(a+8);
   } else if (color == LED_GREEN) {
-    displaybuffer[c] |= _BV(a+8) ;
+    // Turn on green LED.
+    displaybuffer[c] |= _BV(a+8);
+    // Turn off red LED.
+    displaybuffer[c] &= ~_BV(a);
   } 
 }
 
