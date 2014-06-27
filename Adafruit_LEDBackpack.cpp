@@ -185,7 +185,7 @@ static const uint16_t alphafonttable[] PROGMEM =  {
 void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
   if (b > 15) b = 15;
   Wire.beginTransmission(i2c_addr);
-  Wire.write(0xE0 | b);
+  Wire.write(HT16K33_CMD_BRIGHTNESS | b);
   Wire.endTransmission();  
 }
 
