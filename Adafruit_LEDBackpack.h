@@ -38,6 +38,13 @@
 #define LED_YELLOW 2
 #define LED_GREEN 3
  
+// With 3 colors, one of them will be mapped to 2 bits to allow 3 colors
+// in one byte.
+#define DirectMatrix_PWM_LEVELS 7  // 3 bits -> 400 ns refresh with 324ns free
+#define LED_VERYLOW 1
+#define LED_LOW 2
+#define LED_MEDIUM 5
+#define LED_HIGH 7
 
 
 #define HT16K33_BLINK_CMD 0x80
@@ -91,6 +98,24 @@ class Adafruit_24bargraph : public Adafruit_LEDBackpack {
 };
 
 
+class DirectMatrix {
+ public:
+  DirectMatrix(uint8_t, uint8_t);
+  void begin(uint8_t [], uint8_t []);
+  void writeDisplay(void);
+  void clear(void);
+  void init(uint8_t a);
+
+ protected:
+  uint8_t _num_rows;
+  uint8_t _num_cols;
+ 
+ private:
+  uint8_t *_row_pins;
+  uint8_t *_col_pins;
+  uint8_t *_matrix;
+};
+
 class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
  public:
   Adafruit_8x8matrix(void);
@@ -103,6 +128,15 @@ class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
 class Adafruit_BicolorMatrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
  public:
   Adafruit_BicolorMatrix(void);
+
+  void drawPixel(int16_t x, int16_t y, uint16_t color);
+
+ private:
+};
+
+class PWMDirectMatrix : public DirectMatrix, public Adafruit_GFX {
+ public:
+  PWMDirectMatrix(uint8_t, uint8_t);
 
   void drawPixel(int16_t x, int16_t y, uint16_t color);
 
