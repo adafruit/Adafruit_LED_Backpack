@@ -26,6 +26,10 @@
 #endif
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
+// Adafruit backpacks do not need a timer
+// Direct addressing PWM classes use a timer to scan pixels
+#include "TimerOne.h"
+
 
 #ifndef _BV
   #define _BV(bit) (1<<(bit))
@@ -182,6 +186,11 @@ static const uint16_t alphafonttable[] PROGMEM =  {
 0b0011111111111111,
 
 };
+
+
+// ---------------------------------
+// Underlying Hardware Communication
+// ---------------------------------
 void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
   if (b > 15) b = 15;
   Wire.beginTransmission(i2c_addr);
@@ -372,6 +381,140 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
     displaybuffer[y] &= ~(1 << x) & ~(1 << (x+8));
   }
 }
+
+/*********************** PWM DIRECT MATRIX OBJECT */
+
+// Globals required to pass matrix data into the ISR.
+// (volatile is required for ISRs)
+volatile uint8_t DirectMatrix_ARRAY_ROWS;
+volatile uint8_t DirectMatrix_ARRAY_COLS;
+volatile uint8_t *DirectMatrix_MATRIX;
+// These go to ground:
+volatile uint8_t *DirectMatrix_ROW_PINS;
+// Those go to V+
+volatile uint8_t *DirectMatrix_COL_PINS;
+
+// ISR to refresh one matrix line
+// This must be fast since it blocks interrupts and can only use globals.
+void DirectMatrix_RefreshPWMLine(void) {
+    static uint8_t row = 0;
+    static uint8_t pwm = 1;
+    int8_t oldrow = row - 1;
+
+    if (row == 0) oldrow = DirectMatrix_ARRAY_ROWS - 1;
+    // Before setting the columns, shut off the previous row
+    digitalWrite(DirectMatrix_ROW_PINS[oldrow], HIGH);
+
+    // TODO: detect that pin0 is -1 and switch to SR mode
+    // TODO: scan matrix 2nd sets of colors and populate 2nd array
+    for (int8_t col = DirectMatrix_ARRAY_COLS - 1; col >= 0; col--)
+    {
+	if (DirectMatrix_MATRIX[row * DirectMatrix_ARRAY_COLS + col] >= pwm)
+	{
+	    digitalWrite(DirectMatrix_COL_PINS[col], HIGH);
+	}
+	else
+	{
+	    digitalWrite(DirectMatrix_COL_PINS[col], LOW);
+	}
+    }
+    // Now that the colums are set, turn the row on
+    digitalWrite(DirectMatrix_ROW_PINS[row], LOW);
+
+    row++;
+    if (row >= DirectMatrix_ARRAY_ROWS)
+    {
+	row = 0;
+	pwm++;
+	if (pwm > DirectMatrix_PWM_LEVELS) pwm = 1;
+    }
+}
+
+DirectMatrix::DirectMatrix(uint8_t num_rows, uint8_t num_cols) {
+    _num_rows = num_rows;
+    _num_cols = num_cols;
+
+    // These need to be global so that the ISR can get to them.
+    DirectMatrix_ARRAY_ROWS = num_rows;
+    DirectMatrix_ARRAY_COLS = num_cols;
+
+    if (! (_matrix = (uint8_t *) malloc(num_rows * num_cols)))
+    {
+	while (1) {
+	    Serial.println(F("Malloc failed in DirectMatrix::DirectMatrix"));
+	}
+    }
+    DirectMatrix_MATRIX = _matrix;
+}
+
+// Array of of pins for vertical lines, and columns.
+void DirectMatrix::begin(uint8_t __row_pins[], uint8_t __col_pins[]) {
+    _row_pins = __row_pins;
+    _col_pins = __col_pins;
+
+    // These need to be global so that the ISR can get to them
+    DirectMatrix_ROW_PINS = _row_pins;
+    DirectMatrix_COL_PINS = _col_pins;
+
+    // Init the lines and cols with the opposite voltage to turn them off.
+    for (uint8_t i = 0; i < _num_rows; i++)
+    {
+	pinMode(_row_pins[i], OUTPUT);
+	digitalWrite(_row_pins[i], HIGH);
+    }
+    for (uint8_t i = 0; i < _num_cols; i++)
+    {
+	pinMode(_col_pins[i], OUTPUT);
+	digitalWrite(_col_pins[i], LOW);
+    }
+
+    // We want 40Hz refresh at lowest intensity  
+    // x 8 rows x 7 levels of intensity -> 2240Hz or 446us
+    // TODO: dynamically calculate the ISR frequency based
+    // on the matrix size (and number of colors).
+    Timer1.initialize(400);
+    Timer1.attachInterrupt(DirectMatrix_RefreshPWMLine);
+}
+
+void DirectMatrix::writeDisplay(void) {
+    // DirectMatrix uses a timer to keep the display updated
+}
+
+void DirectMatrix::clear(void) {
+  for (uint8_t i=0; i<_num_rows * _num_cols; i++) {
+    DirectMatrix_MATRIX[i] = 0;
+  }
+}
+
+PWMDirectMatrix::PWMDirectMatrix(uint8_t rows, uint8_t cols) : 
+    DirectMatrix(rows, cols), Adafruit_GFX(rows, cols) {
+}
+
+void PWMDirectMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
+  // TODO: we should support more than 8x8, so change this
+  if ((y < 0) || (y >= 8)) return;
+  if ((x < 0) || (x >= 8)) return;
+
+  switch (getRotation()) {
+  case 1:
+    swap(x, y);
+    x = 8 - x - 1;
+    break;
+  case 2:
+    x = 8 - x - 1;
+    y = 8 - y - 1;
+    break;
+  case 3:
+    swap(x, y);
+    y = 8 - y - 1;
+    break;
+  }
+
+  // FIXME? this is reversed, I'd expect y * cols + x, but if I do this
+  // Character drawings from the underlying lib are backwards.
+  DirectMatrix_MATRIX[x * _num_rows + y] = color;
+}
+
 
 /******************************* 7 SEGMENT OBJECT */
 
