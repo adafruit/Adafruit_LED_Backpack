@@ -1,120 +1,128 @@
 /*************************************************** 
-  This is a library for our I2C LED Backpacks
+    This is a library to address LED matrices that requires
+    constant column/row rescans.
 
-  Designed specifically to work with the Adafruit LED Matrix backpacks 
-  ----> http://www.adafruit.com/products/872
-  ----> http://www.adafruit.com/products/871
-  ----> http://www.adafruit.com/products/870
+    It uses code from the Adafruit I2C LED backpack library designed for
+    ----> http://www.adafruit.com/products/881
+    ----> http://www.adafruit.com/products/880
+    ----> http://www.adafruit.com/products/879
+    ----> http://www.adafruit.com/products/878
 
-  These displays use I2C to communicate, 2 pins are required to 
-  interface. There are multiple selectable I2C addresses. For backpacks
-  with 2 Address Select pins: 0x70, 0x71, 0x72 or 0x73. For backpacks
-  with 3 Address Select pins: 0x70 thru 0x77
+    Adafruit invests time and resources providing this open source code, 
+    please support Adafruit and open-source hardware by purchasing 
+    products from Adafruit!
 
-  Adafruit invests time and resources providing this open source code, 
-  please support Adafruit and open-source hardware by purchasing 
-  products from Adafruit!
-
-  Written by Limor Fried/Ladyada for Adafruit Industries.  
-  BSD license, all text above must be included in any redistribution
+    Original code written by Limor Fried/Ladyada for Adafruit Industries.  
+    BSD license, all text above must be included in any redistribution
  ****************************************************/
 
 #include <Wire.h>
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
+#include "TimerOne.h"
 
-Adafruit_8x8matrix matrix = Adafruit_8x8matrix();
+// These go to ground:
+uint8_t _gnd_lines[] = { 5, 6, 7, 8, 12, 11, 10, 9 };
+// Those go to V+
+// A6 and A7 do NOT work as digital pins on Arduino Nano
+uint8_t _redcolumns[] = { A0, A1, A2, A3, A4, A5, 4, 0 };
+
+PWMDirectMatrix *matrix;
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("8x8 LED Matrix Test");
-  
-  matrix.begin(0x70);  // pass in the address
+#ifndef __AVR_ATtiny85__
+    // Initializing serial breaks one row (shared pin)
+    //Serial.begin(57600);
+    //Serial.println("DirectMatrix Test");
+#endif
+    matrix = new PWMDirectMatrix(8, 8);
+    matrix->begin(_gnd_lines, _redcolumns);
+
 }
 
 static const uint8_t PROGMEM
-  smile_bmp[] =
-  { B00111100,
-    B01000010,
-    B10100101,
-    B10000001,
-    B10100101,
-    B10011001,
-    B01000010,
-    B00111100 },
-  neutral_bmp[] =
-  { B00111100,
-    B01000010,
-    B10100101,
-    B10000001,
-    B10111101,
-    B10000001,
-    B01000010,
-    B00111100 },
-  frown_bmp[] =
-  { B00111100,
-    B01000010,
-    B10100101,
-    B10000001,
-    B10011001,
-    B10100101,
-    B01000010,
-    B00111100 };
+    smile_bmp[] =
+    { B00111100,
+        B01000010,
+        B10100101,
+        B10000001,
+        B10100101,
+        B10011001,
+        B01000010,
+        B00111100 },
+    neutral_bmp[] =
+    { B00111100,
+        B01000010,
+        B10100101,
+        B10000001,
+        B10111101,
+        B10000001,
+        B01000010,
+        B00111100 },
+    frown_bmp[] =
+    { B00111100,
+        B01000010,
+        B10100101,
+        B10000001,
+        B10011001,
+        B10100101,
+        B01000010,
+        B00111100 };
+
 
 void loop() {
-  matrix.clear();
-  matrix.drawBitmap(0, 0, smile_bmp, 8, 8, LED_ON);
-  matrix.writeDisplay();
-  delay(500);
 
-  matrix.clear();
-  matrix.drawBitmap(0, 0, neutral_bmp, 8, 8, LED_ON);
-  matrix.writeDisplay();
-  delay(500);
+    matrix->clear();
+    matrix->drawBitmap(0, 0, smile_bmp, 8, 8, LED_HIGH);
+    matrix->writeDisplay();
+    delay(1000);
 
-  matrix.clear();
-  matrix.drawBitmap(0, 0, frown_bmp, 8, 8, LED_ON);
-  matrix.writeDisplay();
-  delay(500);
+    matrix->clear();
+    matrix->drawBitmap(0, 0, neutral_bmp, 8, 8, LED_MEDIUM);
+    matrix->writeDisplay();
+    delay(1000);
 
-  matrix.clear();      // clear display
-  matrix.drawPixel(0, 0, LED_ON);  
-  matrix.writeDisplay();  // write the changes we just made to the display
-  delay(500);
+    matrix->clear();
+    matrix->drawBitmap(0, 0, frown_bmp, 8, 8, LED_VERYLOW);
+    matrix->writeDisplay();
+    delay(1000);
 
-  matrix.clear();
-  matrix.drawLine(0,0, 7,7, LED_ON);
-  matrix.writeDisplay();  // write the changes we just made to the display
-  delay(500);
+    matrix->clear();
+    matrix->drawLine(0,0, 7,7, LED_MEDIUM);
+    matrix->writeDisplay();  // write the changes we just made to the display
+    delay(500);
 
-  matrix.clear();
-  matrix.drawRect(0,0, 8,8, LED_ON);
-  matrix.fillRect(2,2, 4,4, LED_ON);
-  matrix.writeDisplay();  // write the changes we just made to the display
-  delay(500);
+    matrix->clear();
+    matrix->drawRect(0,0, 8,8, LED_VERYLOW);
+    matrix->fillRect(2,2, 4,4, LED_HIGH);
+    matrix->writeDisplay();  // write the changes we just made to the display
+    delay(2000);
 
-  matrix.clear();
-  matrix.drawCircle(3,3, 3, LED_ON);
-  matrix.writeDisplay();  // write the changes we just made to the display
-  delay(500);
+    matrix->clear();
+    matrix->drawCircle(3,3, 3, LED_MEDIUM);
+    matrix->writeDisplay();  // write the changes we just made to the display
+    delay(500);
 
-  matrix.setTextSize(1);
-  matrix.setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
-  matrix.setTextColor(LED_ON);
-  for (int8_t x=0; x>=-36; x--) {
-    matrix.clear();
-    matrix.setCursor(x,0);
-    matrix.print("Hello");
-    matrix.writeDisplay();
+    matrix->setTextWrap(false);  // we don't want text to wrap so it scrolls nicely
+    matrix->setTextSize(1);
+    matrix->setTextColor(LED_MEDIUM);
+    matrix->setRotation(1);
+    for (int8_t x=7; x>=-36; x--) {
+        matrix->clear();
+        matrix->setCursor(x,0);
+        matrix->print("Hello");
+        matrix->writeDisplay();
+	delay(50);
+    }
     delay(100);
-  }
-  matrix.setRotation(3);
-  for (int8_t x=7; x>=-36; x--) {
-    matrix.clear();
-    matrix.setCursor(x,0);
-    matrix.print("World");
-    matrix.writeDisplay();
-    delay(100);
-  }
-  matrix.setRotation(0);
+    matrix->setRotation(2);
+    matrix->setTextColor(LED_HIGH);
+    for (int8_t x=7; x>=-36; x--) {
+        matrix->clear();
+        matrix->setCursor(x,0);
+        matrix->print("World");
+        matrix->writeDisplay();
+	delay(50);
+    }
+    matrix->setRotation(0);
 }
