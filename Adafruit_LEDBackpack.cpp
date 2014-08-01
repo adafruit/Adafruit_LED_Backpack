@@ -251,7 +251,7 @@ void Adafruit_AlphaNum4::writeDigitAscii(uint8_t n, uint8_t a,  boolean d) {
   Serial.print("' = 0x"); Serial.println(font, HEX);
   */
 
-  if (d) displaybuffer[n] |= (1<<15);
+  if (d) displaybuffer[n] |= (1<<14);
 }
 
 /******************************* 24 BARGRAPH OBJECT */
