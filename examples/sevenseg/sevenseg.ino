@@ -50,11 +50,9 @@ void loop() {
   delay(500);
 
   // print a floating point 
-  /* this isnt working yet, still hacking on it!
   matrix.print(12.34);
   matrix.writeDisplay();
   delay(500);
-  */
   
   // print with print/println
   for (uint16_t counter = 0; counter < 9999; counter++) {
