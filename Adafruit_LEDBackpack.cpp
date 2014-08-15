@@ -285,6 +285,45 @@ void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
 }
 
 
+/******************************* 16x8 MATRIX OBJECT */
+
+Adafruit_8x16matrix::Adafruit_8x16matrix(void) : Adafruit_GFX(8, 16) {
+}
+
+void Adafruit_8x16matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
+
+ // check rotation, move pixel around if necessary
+  switch (getRotation()) {
+  case 2:
+    swap(x, y);
+    x = 16 - x - 1;
+    break;
+  case 3:
+    x = 16 - x - 1;
+    y = 8 - y - 1;
+    break;
+  case 0:
+    swap(x, y);
+    y = 8 - y - 1;
+    break;
+  }
+  /*
+  Serial.print("("); Serial.print(x);
+  Serial.print(","); Serial.print(y);
+  Serial.println(")");
+  */
+
+  if ((y < 0) || (y >= 8)) return;
+  if ((x < 0) || (x >= 16)) return;
+
+  if (color) {
+    displaybuffer[y] |= 1 << x;
+  } else {
+    displaybuffer[y] &= ~(1 << x);
+  }
+}
+
+
 /******************************* 8x8 MATRIX OBJECT */
 
 Adafruit_8x8matrix::Adafruit_8x8matrix(void) : Adafruit_GFX(8, 8) {
