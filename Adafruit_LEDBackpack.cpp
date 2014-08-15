@@ -185,7 +185,7 @@ static const uint16_t alphafonttable[] PROGMEM =  {
 void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
   if (b > 15) b = 15;
   Wire.beginTransmission(i2c_addr);
-  Wire.write(0xE0 | b);
+  Wire.write(HT16K33_CMD_BRIGHTNESS | b);
   Wire.endTransmission();  
 }
 
@@ -251,7 +251,7 @@ void Adafruit_AlphaNum4::writeDigitAscii(uint8_t n, uint8_t a,  boolean d) {
   Serial.print("' = 0x"); Serial.println(font, HEX);
   */
 
-  if (d) displaybuffer[n] |= (1<<15);
+  if (d) displaybuffer[n] |= (1<<14);
 }
 
 /******************************* 24 BARGRAPH OBJECT */
@@ -274,13 +274,21 @@ void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
     
   //Serial.print("Ano = "); Serial.print(a); Serial.print(" Cath = "); Serial.println(c);
   if (color == LED_RED) {
-    displaybuffer[c] |= _BV(a) ;
+    // Turn on red LED.
+    displaybuffer[c] |= _BV(a);
+    // Turn off green LED.
+    displaybuffer[c] &= ~_BV(a+8);
   } else if (color == LED_YELLOW) {
+    // Turn on red and green LED.
     displaybuffer[c] |= _BV(a) | _BV(a+8);
   } else if (color == LED_OFF) {
+    // Turn off red and green LED.
     displaybuffer[c] &= ~_BV(a) & ~_BV(a+8);
   } else if (color == LED_GREEN) {
-    displaybuffer[c] |= _BV(a+8) ;
+    // Turn on green LED.
+    displaybuffer[c] |= _BV(a+8);
+    // Turn off red LED.
+    displaybuffer[c] &= ~_BV(a);
   } 
 }
 
@@ -386,12 +394,20 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
   }
 
   if (color == LED_GREEN) {
+    // Turn on green LED.
     displaybuffer[y] |= 1 << x;
+    // Turn off red LED.
+    displaybuffer[y] &= ~(1 << (x+8));
   } else if (color == LED_RED) {
+    // Turn on red LED.
     displaybuffer[y] |= 1 << (x+8);
+    // Turn off green LED.
+    displaybuffer[y] &= ~(1 << x);
   } else if (color == LED_YELLOW) {
+    // Turn on green and red LED.
     displaybuffer[y] |= (1 << (x+8)) | (1 << x);
   } else if (color == LED_OFF) {
+    // Turn off green and red LED.
     displaybuffer[y] &= ~(1 << x) & ~(1 << (x+8));
   }
 }
@@ -505,9 +521,19 @@ void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
 
 void Adafruit_7segment::drawColon(boolean state) {
   if (state)
-    displaybuffer[2] = 0xFF;
+    displaybuffer[2] = 0x2;
   else
     displaybuffer[2] = 0;
+}
+
+void Adafruit_7segment::writeColon(void) {
+    Wire.beginTransmission(i2c_addr);
+    Wire.write((uint8_t)0x04); // start at address $02
+    
+    Wire.write(displaybuffer[2] & 0xFF);
+    Wire.write(displaybuffer[2] >> 8);
+
+    Wire.endTransmission();
 }
 
 void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
@@ -568,7 +594,7 @@ void Adafruit_7segment::printFloat(double n, uint8_t fracDigits, uint8_t base)
     
     if (displayNumber)  //if displayNumber is not 0
     {
-      for(uint8_t i = 0; displayNumber; ++i) {
+      for(uint8_t i = 0; displayNumber || i <= fracDigits; ++i) {
         boolean displayDecimal = (fracDigits != 0 && i == fracDigits);
         writeDigitNum(displayPos--, displayNumber % base, displayDecimal);
         if(displayPos == 2) writeDigitRaw(displayPos--, 0x00);
