@@ -15,7 +15,7 @@
   products from Adafruit!
 
   Written by Limor Fried/Ladyada for Adafruit Industries.  
-  BSD license, all text above must be included in any redistribution
+  MIT license, all text above must be included in any redistribution
  ****************************************************/
 
 #if (ARDUINO >= 100)
