@@ -7,6 +7,7 @@ This library works with the Adafruit Mini 8x8 and 7-Segment LED Backpacks
   ----> http://www.adafruit.com/products/872
   ----> http://www.adafruit.com/products/871
   ----> http://www.adafruit.com/products/870
+  ----> http://www.adafruit.com/products/902
 
 These displays use I2C to communicate, 2 pins are required to 
 interface. There are multiple selectable I2C addresses. For backpacks
