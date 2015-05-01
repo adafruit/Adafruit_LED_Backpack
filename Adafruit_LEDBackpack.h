@@ -17,6 +17,8 @@
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   MIT license, all text above must be included in any redistribution
  ****************************************************/
+#ifndef Adafruit_LEDBackpack_h
+#define Adafruit_LEDBackpack_h
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -158,3 +160,5 @@ class Adafruit_7segment : public Adafruit_LEDBackpack {
  private:
   uint8_t position;
 };
+#endif // Adafruit_LEDBackpack_h
+
