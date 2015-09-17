@@ -101,14 +101,32 @@ void loop() {
   // 100 and then adding the minutes.
   int displayValue = hours*100 + minutes;
 
-  // If we're using 12-hour format and it's past noon then subtract
-  // 1200 from the display value.
-  if (!TIME_24_HOUR && hours > 11) {
-    displayValue -= 1200;
+  // Do 24 hour to 12 hour format conversion when required.
+  if (!TIME_24_HOUR) {
+    // Handle when hours are past 12 by subtracting 12 hours (1200 value).
+    if (hours > 11) {
+      displayValue -= 1200;
+    }
+    // Handle hour 0 (midnight) being shown as 12.
+    else if (hours == 0) {
+      displayValue += 1200;
+    }
   }
 
   // Now print the time value to the display.
   clockDisplay.print(displayValue, DEC);
+
+  // Add zero padding when in 24 hour mode and it's midnight.
+  // In this case the print function above won't have leading 0's
+  // which can look confusing.  Go in and explicitly add these zeros.
+  if (TIME_24_HOUR && hours == 0) {
+    // Pad hour 0.
+    clockDisplay.writeDigitNum(1, 0);
+    // Also pad when the 10's minute is 0 and should be padded.
+    if (minutes < 10) {
+      clockDisplay.writeDigitNum(2, 0);
+    }
+  }
 
   // Blink the colon by turning it on every even second and off
   // every odd second.  The modulus operator is very handy here to
