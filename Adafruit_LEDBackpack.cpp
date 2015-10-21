@@ -213,6 +213,10 @@ void Adafruit_LEDBackpack::begin(uint8_t _addr = 0x70) {
   setBrightness(15); // max brightness
 }
 
+void Adafruit_LEDBackpack::setAddr(uint8_t _addr = 0x70) {
+  i2c_addr = _addr;
+}
+
 void Adafruit_LEDBackpack::writeDisplay(void) {
   Wire.beginTransmission(i2c_addr);
   Wire.write((uint8_t)0x00); // start at address $00
@@ -252,6 +256,14 @@ void Adafruit_AlphaNum4::writeDigitAscii(uint8_t n, uint8_t a,  boolean d) {
   */
 
   if (d) displaybuffer[n] |= (1<<14);
+}
+
+uint16_t Adafruit_AlphaNum4::asciiToRaw(uint8_t a,  boolean d) {
+  uint16_t font = pgm_read_word(alphafonttable+a);
+
+  if (d) font |= (1<<14);
+
+  return font;
 }
 
 /******************************* 24 BARGRAPH OBJECT */
