@@ -17,7 +17,7 @@ with 3 Address Select pins: 0x70 thru 0x77
 Written by Limor Fried/Ladyada for Adafruit Industries.
 MIT license, all text above must be included in any redistribution
 
-To download. click the DOWNLOADS button in the top right corner, rename the uncompressed folder Adafruit_LEDBackpack. Check that the Adafruit_LEDBackpack folder contains Adafruit_LEDBackpack.cpp and Adafruit_LEDBackpack.
+To download. click the DOWNLOADS button in the top right corner, rename the uncompressed folder Adafruit_LEDBackpack. Check that the Adafruit_LEDBackpack folder contains Adafruit_LEDBackpack.cpp and Adafruit_LEDBackpack.h.
 
 Place the Adafruit_LEDBackpack library folder your <arduinosketchfolder>/libraries/ folder. You may need to create the libraries subfolder if its your first library. Restart the IDE
 
