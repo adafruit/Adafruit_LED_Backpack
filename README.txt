@@ -1,5 +1,8 @@
 This is a library for the Adafruit LED Backpacks
 This library works with the Adafruit Mini 8x8 and 7-Segment LED Backpacks
+  ----> http://www.adafruit.com/products/1270
+  ----> http://www.adafruit.com/products/1269
+  ----> http://www.adafruit.com/products/1268
   ----> http://www.adafruit.com/products/881
   ----> http://www.adafruit.com/products/880
   ----> http://www.adafruit.com/products/879
