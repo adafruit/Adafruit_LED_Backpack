@@ -327,6 +327,58 @@ void Adafruit_8x16matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
   }
 }
 
+/******************************* 16x8 MINI MATRIX OBJECT */
+
+Adafruit_8x16minimatrix::Adafruit_8x16minimatrix(void) : Adafruit_GFX(8, 16) {
+}
+
+void Adafruit_8x16minimatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
+
+  if ((y < 0) || (x < 0)) return;
+  if ((getRotation() % 2 == 0) && ((y >= 16) || (x >= 8))) return;
+  if ((getRotation() % 2 == 1) && ((x >= 16) || (y >= 8))) return;
+
+
+ // check rotation, move pixel around if necessary
+  switch (getRotation()) {
+  case 2:
+    if (y >= 8) {
+      x += 8;
+      y -= 8; 
+    }
+    adagfxswap(x, y);
+    break;
+  case 3:
+    x = 16 - x - 1;
+    if (x >= 8) {
+      x -= 8;
+      y += 8; 
+    }
+    break;
+  case 0:
+    y = 16 - y - 1;
+    x = 8 - x - 1;
+    if (y >= 8) {
+      x += 8;
+      y -= 8; 
+    }
+    adagfxswap(x, y);
+    break;
+  case 1:
+    y = 8 - y - 1;
+    if (x >= 8) {
+      x -= 8;
+      y += 8; 
+    }
+    break;
+  }
+
+  if (color) {
+    displaybuffer[x] |= 1 << y;
+  } else {
+    displaybuffer[x] &= ~(1 << y);
+  }
+}
 
 /******************************* 8x8 MATRIX OBJECT */
 

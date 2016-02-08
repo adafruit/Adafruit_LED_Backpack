@@ -100,6 +100,15 @@ class Adafruit_8x16matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
  private:
 };
 
+class Adafruit_8x16minimatrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
+ public:
+  Adafruit_8x16minimatrix(void);
+
+  void drawPixel(int16_t x, int16_t y, uint16_t color);
+
+ private:
+};
+
 class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
  public:
   Adafruit_8x8matrix(void);
