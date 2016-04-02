@@ -213,6 +213,18 @@ void Adafruit_LEDBackpack::begin(uint8_t _addr = 0x70) {
   setBrightness(15); // max brightness
 }
 
+void Adafruit_LEDBackpack::ledOff(void) {
+    Wire.beginTransmission(i2c_addr);
+    Wire.write(HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYOFF);
+    Wire.endTransmission();
+}
+
+void Adafruit_LEDBackpack::ledOn(void) {
+    Wire.beginTransmission(i2c_addr);
+    Wire.write(HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON);
+    Wire.endTransmission();
+}
+
 void Adafruit_LEDBackpack::writeDisplay(void) {
   Wire.beginTransmission(i2c_addr);
   Wire.write((uint8_t)0x00); // start at address $00

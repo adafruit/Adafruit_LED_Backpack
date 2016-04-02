@@ -41,6 +41,7 @@
 
 
 #define HT16K33_BLINK_CMD 0x80
+#define HT16K33_BLINK_DISPLAYOFF 0x00
 #define HT16K33_BLINK_DISPLAYON 0x01
 #define HT16K33_BLINK_OFF 0
 #define HT16K33_BLINK_2HZ  1
@@ -61,6 +62,9 @@ class Adafruit_LEDBackpack {
   void blinkRate(uint8_t b);
   void writeDisplay(void);
   void clear(void);
+
+  void ledOn(void);
+  void ledOff(void);
 
   uint16_t displaybuffer[8]; 
 
