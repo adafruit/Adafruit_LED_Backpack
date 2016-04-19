@@ -517,7 +517,7 @@ size_t Adafruit_7segment::write(uint8_t c) {
 // Writes a letter to a specific position in the buffer
 void Adafruit_7segment::writeLetter(char letter, int pos)
 {
-  if (pos > 4) break; 
+  if (pos > 4) return; 
   
   uint8_t raw_letter;
   
