@@ -514,6 +514,77 @@ size_t Adafruit_7segment::write(uint8_t c) {
   return r;
 }
 
+// Writes a letter to a specific position in the buffer
+void Adafruit_7segment::writeLetter(char letter, int pos)
+{
+  if (pos > 4) break; 
+  
+  uint8_t raw_letter;
+  
+  switch (letter)
+  {
+    case 'a': case 'A': raw_letter = 0b1110111; break;
+    case 'b': case 'B': raw_letter = 0b1111100; break;
+    case 'c': case 'C': raw_letter = 0b0111001; break;
+    case 'd': case 'D': raw_letter = 0b1011110; break;
+    case 'e': case 'E': raw_letter = 0b1111001; break;
+    case 'f': case 'F': raw_letter = 0b1110001; break;
+    case 'g': case 'G': raw_letter = 0b1101111; break;
+    case 'h': case 'H': raw_letter = 0b1110100; break;
+    case 'i': case 'I': raw_letter = 0b0110000; break;
+    case 'j': case 'J': raw_letter = 0b0011110; break;
+    case 'k': case 'K': raw_letter = 0b0000000; break;
+    case 'l': case 'L': raw_letter = 0b0111000; break;
+    case 'm': case 'M': raw_letter = 0b0010101; break;
+    case 'n': case 'N': raw_letter = 0b1010100; break;
+    case 'o': case 'O': raw_letter = 0b1011100; break;
+    case 'p': case 'P': raw_letter = 0b1110011; break;
+    case 'q': case 'Q': raw_letter = 0b1100111; break;
+    case 'r': case 'R': raw_letter = 0b1010000; break;
+    case 's': case 'S': raw_letter = 0b1101101; break;
+    case 't': case 'T': raw_letter = 0b1111000; break;
+    case 'u': case 'U': raw_letter = 0b0111110; break;
+    case 'v': case 'V': raw_letter = 0b0011100; break;
+    case 'w': case 'W': raw_letter = 0b0101010; break;
+    case 'x': case 'X': raw_letter = 0b1110110; break;
+    case 'y': case 'Y': raw_letter = 0b1101110; break;
+    case 'z': case 'Z': raw_letter = 0b1011011; break;
+    case '0': raw_letter = 0b0111111; break; case '1': raw_letter = 0b0000110; break;
+    case '2': raw_letter = 0b1011011; break; case '3': raw_letter = 0b1001111; break;
+    case '4': raw_letter = 0b1100110; break; case '5': raw_letter = 0b1101101; break;
+    case '6': raw_letter = 0b1111101; break; case '7': raw_letter = 0b0000111; break;
+    case '8': raw_letter = 0b1111111; break; case '9': raw_letter = 0b1101111; break;
+    case ' ': case '\0': default: raw_letter = 0b0000000;
+  }
+  
+  // Write to buffer
+  writeDigitRaw(pos, raw_letter);
+}
+
+// Writes a string to the buffer
+void Adafruit_7segment::writeString(char str[5])
+{
+  for (int i = 0; i < 5; i++)
+  {
+    if (i == 2)
+    {
+      writeLetter(' ', i);
+    }
+    else
+    {
+      writeLetter((i > 2) ? str[i - 1] : str[i], i);
+    }
+  }
+}
+
+// Writes a string to the buffer, then displays the buffer
+void Adafruit_7segment::displayString(char str[5])
+{
+  writeString(str); // Write the string to the buffer 
+  writeDisplay(); // Show the buffer
+}
+
+
 void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
   if (d > 4) return;
   displaybuffer[d] = bitmask;

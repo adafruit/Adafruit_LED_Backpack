@@ -146,6 +146,10 @@ class Adafruit_7segment : public Adafruit_LEDBackpack {
   void println(double, int = 2);
   void println(void);
   
+  void writeLetter(char letter, int pos);   // Writes a single letter to a position in the buffer 
+  void writeString(char str[5]);            // Writes a string to the buffer 
+  void displayString(char str[5]);          // Writes a string to the buffer, then displays the buffer 
+  
   void writeDigitRaw(uint8_t x, uint8_t bitmask);
   void writeDigitNum(uint8_t x, uint8_t num, boolean dot = false);
   void drawColon(boolean state);
