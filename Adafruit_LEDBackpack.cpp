@@ -350,7 +350,7 @@ void Adafruit_8x16minimatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
       x += 8;
       y -= 8; 
     }
-    adagfxswap(x, y);
+     _swap_int16_t(x, y);
     break;
   case 3:
     x = 16 - x - 1;
@@ -366,7 +366,7 @@ void Adafruit_8x16minimatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
       x += 8;
       y -= 8; 
     }
-    adagfxswap(x, y);
+     _swap_int16_t(x, y);
     break;
   case 1:
     y = 8 - y - 1;
