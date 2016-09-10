@@ -39,10 +39,10 @@
 
 // These WAV files should be in the root level of the SD card:
 static const char PROGMEM
-  wav0[]     = "beware_i.wav",
-  wav1[]     = "ihunger.wav",
-  wav2[]     = "run_cowd.wav",
-  *wavname[] = { wav0, wav1, wav2 };
+  wav0[] = "beware_i.wav",
+  wav1[] = "ihunger.wav",
+  wav2[] = "run_cowd.wav";
+static const char * const wavname[] PROGMEM = { wav0, wav1, wav2 };
 // PROGMEM makes frequent appearances throughout this code, reason being that
 // the SD card library requires gobs of precious RAM (leaving very little to
 // our own sketch).  PROGMEM lets us put fixed data into program flash memory,
@@ -54,8 +54,6 @@ FatVolume vol;  // This holds the information for the partition on the card
 FatReader root; // This holds the information for the volumes root directory
 FatReader file; // This object represent the WAV file for a phrase
 WaveHC    wave; // A single wave object -- only one sound is played at a time
-// Macro to put error messages in flash memory
-#define error(msg) error_P(PSTR(msg))
 
 // Because the two eye matrices share the same address, only four
 // matrix objects are needed for the five displays:
@@ -175,19 +173,20 @@ static const uint8_t PROGMEM // Bitmaps are stored in program memory
 // http://www.idleworm.com/how/anm/03t/talk1.shtml
 
 static const uint8_t PROGMEM
-  seq1[]  = { 0, 2,   2, 5,   5, 3,   3, 7, // "Beware, I live!"
-              4, 5,   3, 4,   2, 5,   4, 3,
-              3, 4,   1, 5,   3, 5,    255 },
-  seq2[]  = { 0, 1,   3, 5,   1, 5,   4, 2, // "I hunger!"
-              3, 2,   1, 2,   4, 4,   1, 3,
-              4, 2,   255 },
-  seq3[]  = { 0, 1,   1, 2,   3, 6,   2, 5, // "Run, coward!"
-              0, 1,   4, 4,   5, 2,   1, 5,
-              3, 6,   1, 4,    255 },
-  *anim[] = { seq1, seq2, seq3 };
+  seq1[] = { 0, 2,   2, 5,   5, 3,   3, 7, // "Beware, I live!"
+             4, 5,   3, 4,   2, 5,   4, 3,
+             3, 4,   1, 5,   3, 5,    255 },
+  seq2[] = { 0, 1,   3, 5,   1, 5,   4, 2, // "I hunger!"
+             3, 2,   1, 2,   4, 4,   1, 3,
+             4, 2,   255 },
+  seq3[] = { 0, 1,   1, 2,   3, 6,   2, 5, // "Run, coward!"
+             0, 1,   4, 4,   5, 2,   1, 5,
+             3, 6,   1, 4,    255 };
+static const uint8_t * const anim[] = { seq1, seq2, seq3 };
 
+const uint8_t
+  blinkIndex[] PROGMEM = { 1, 2, 3, 4, 3, 2, 1 }; // Blink bitmap sequence
 uint8_t
-  blinkIndex[] PROGMEM = { 1, 2, 3, 4, 3, 2, 1 }, // Blink bitmap sequence
   blinkCountdown = 100, // Countdown to next blink (in frames)
   gazeCountdown  =  75, // Countdown to next eye movement
   gazeFrames     =  50, // Duration of eye movement (smaller = faster)
@@ -207,12 +206,12 @@ void setup() {
 
   Serial.begin(9600);           
   
-  PgmPrintln("WAV face");
+  Serial.println(F("WAV face"));
   
-  if(!card.init())        error("Card init. failed!");
-  if(!vol.init(card))     error("No partition!");
-  if(!root.openRoot(vol)) error("Couldn't open dir");
-  PgmPrintln("Files found:");
+  if(!card.init())        Serial.println(F("Card init. failed!"));
+  if(!vol.init(card))     Serial.println(F("No partition!"));
+  if(!root.openRoot(vol)) Serial.println(F("Couldn't open dir"));
+  Serial.println(F("Files found:"));
   root.ls();
 
   // Seed random number generator from an unused analog input:
@@ -315,23 +314,6 @@ void drawMouth(const uint8_t *img) {
   }
 }
 
-void error_P(const char *str) {
-  PgmPrint("Error: ");
-  SerialPrint_P(str);
-  sdErrorCheck();
-  while(1);
-}
-
-// print error message and halt if SD I/O error
-void sdErrorCheck(void) {
-  if (!card.errorCode()) return;
-  PgmPrint("\r\nSD I/O error: ");
-  Serial.print(card.errorCode(), HEX);
-  PgmPrint(", ");
-  Serial.println(card.errorData(), HEX);
-  while(1);
-}
-
 // Open and start playing a WAV file
 void playfile(const char *name) {
   char filename[13]; // 8.3+NUL
@@ -341,12 +323,12 @@ void playfile(const char *name) {
   strcpy_P(filename, name); // Copy name out of PROGMEM into RAM
 
   if(!file.open(root, filename)) {
-    PgmPrint("Couldn't open file ");
-    Serial.print(filename);
+    Serial.print(F("Couldn't open file "));
+    Serial.println(filename);
     return;
   }
   if(!wave.create(file)) {
-    PgmPrintln("Not a valid WAV");
+    Serial.println(F("Not a valid WAV"));
     return;
   }
   wave.play();
