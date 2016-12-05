@@ -32,10 +32,10 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include "Adafruit_LEDBackpack.h"
-#include "Adafruit_GFX.h"
+#include <Adafruit_GFX.h>
 #include <WaveHC.h>
 #include <WaveUtil.h>
+#include "Adafruit_LEDBackpack.h"
 
 // These WAV files should be in the root level of the SD card:
 static const char PROGMEM

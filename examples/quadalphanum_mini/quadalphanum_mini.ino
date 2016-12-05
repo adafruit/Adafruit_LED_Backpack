@@ -1,11 +1,10 @@
 // Demo the quad alphanumeric display LED backpack kit
 // Displays a short message and then scrolls through every character
 
-// For use with Gemma or Trinket (Attiny85) - requires TinyWireM
-// https://github.com/adafruit/TinyWireM
+// For use with Gemma or Trinket (Attiny85) 
 
 #include <avr/power.h>
-#include <TinyWireM.h>   // this for Attiny85 based like Trinket & Gemma
+#include <Wire.h>
 
 
 // Connect + pins to 3-5V
@@ -13,8 +12,8 @@
 // Connect Data to #0
 // Connect Clock to #2
 
+#include <Adafruit_GFX.h>
 #include "Adafruit_LEDBackpack.h"
-#include "Adafruit_GFX.h"
 
 char *message = "Hello world!     ";
 

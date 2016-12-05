@@ -17,10 +17,11 @@
 //
 // Written by Tony DiCola for Adafruit Industries.
 // Released under a MIT license: https://opensource.org/licenses/MIT
+
 #include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <RTClib.h>
 #include "Adafruit_LEDBackpack.h"
-#include "Adafruit_GFX.h"
-#include "RTClib.h"
 
 
 // Set to false to display time in 12 hour format, or true to use 24 hour:

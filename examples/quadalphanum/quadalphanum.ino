@@ -3,8 +3,8 @@
 // input onto the display
 
 #include <Wire.h>
+#include <Adafruit_GFX.h>
 #include "Adafruit_LEDBackpack.h"
-#include "Adafruit_GFX.h"
 
 Adafruit_AlphaNum4 alpha4 = Adafruit_AlphaNum4();
 
