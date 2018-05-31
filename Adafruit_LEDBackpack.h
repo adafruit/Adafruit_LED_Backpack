@@ -137,7 +137,7 @@ class Adafruit_BicolorMatrix : public Adafruit_LEDBackpack, public Adafruit_GFX 
 class Adafruit_7segment : public Adafruit_LEDBackpack {
  public:
   Adafruit_7segment(void);
-  size_t write(uint8_t c);
+  size_t write(char c);
 
   void print(char, int = BYTE);
   void print(unsigned char, int = BYTE);
@@ -157,6 +157,7 @@ class Adafruit_7segment : public Adafruit_LEDBackpack {
   
   void writeDigitRaw(uint8_t x, uint8_t bitmask);
   void writeDigitNum(uint8_t x, uint8_t num, boolean dot = false);
+  void writeDigitChar(uint8_t x, char c, boolean dot = false);
   void drawColon(boolean state);
   void printNumber(long, uint8_t = 2);
   void printFloat(double, uint8_t = 2, uint8_t = DEC);
