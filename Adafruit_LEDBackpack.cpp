@@ -550,15 +550,22 @@ Adafruit_7segment::Adafruit_7segment(void) {
   position = 0;
 }
 
-void Adafruit_7segment::print(unsigned long n, int base)
-{
-  if (base == 0) write(n);
-  else printNumber(n, base);
+void Adafruit_7segment::print(const String & c) {
+	write(c.c_str(), c.length());
 }
 
-void Adafruit_7segment::print(char c, int base)
+void Adafruit_7segment::print(const char c[]) {
+	write(c, strlen(c));
+}
+
+void Adafruit_7segment::print(char c) {
+	write(c);
+}
+
+void Adafruit_7segment::print(unsigned long n, int base)
 {
-  print((long) c, base);
+	if (base == 0) write(n);
+	else printNumber(n, base);
 }
 
 void Adafruit_7segment::print(unsigned char b, int base)
@@ -580,10 +587,19 @@ void  Adafruit_7segment::println(void) {
   position = 0;
 }
 
-void  Adafruit_7segment::println(char c, int base)
-{
-  print(c, base);
-  println();
+void Adafruit_7segment::println(const String &c) {
+    print(c);
+    println();
+}
+
+void Adafruit_7segment::println(const char c[]) {
+    print(c);
+    println();
+}
+
+void Adafruit_7segment::println(char c) {
+    print(c);
+    println();
 }
 
 void  Adafruit_7segment::println(unsigned char b, int base)
@@ -644,6 +660,22 @@ size_t Adafruit_7segment::write(char c) {
   if (position == 2) position++;
 
   return r;
+}
+
+size_t Adafruit_7segment::write(const char *buffer, size_t size) {
+    size_t n = 0;
+
+    while (n < size) {
+        write(buffer[n]);
+        n++;
+    }
+
+    // Clear unwritten positions
+    for (uint8_t i = position; i < 5; i++) {
+        writeDigitRaw(i, 0x00);
+    }
+
+    return n;
 }
 
 void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
