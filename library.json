@@ -9,7 +9,7 @@
   },
   "dependencies":
   {
-    "name": "Adafruit-GFX",
+    "name": "Adafruit GFX Library",
     "frameworks": "arduino"
   },
   "frameworks": "arduino",
