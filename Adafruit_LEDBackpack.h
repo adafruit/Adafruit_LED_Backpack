@@ -56,10 +56,10 @@
 class Adafruit_LEDBackpack {
  public:
   Adafruit_LEDBackpack(void);
-  void begin(uint8_t _addr);
-  void setBrightness(uint8_t b);
-  void blinkRate(uint8_t b);
-  void writeDisplay(void);
+  byte begin(uint8_t _addr);
+  byte setBrightness(uint8_t b);
+  byte blinkRate(uint8_t b);
+  byte writeDisplay(void);
   void clear(void);
 
   uint16_t displaybuffer[8]; 
@@ -162,7 +162,7 @@ class Adafruit_7segment : public Adafruit_LEDBackpack {
   void printFloat(double, uint8_t = 2, uint8_t = DEC);
   void printError(void);
 
-  void writeColon(void);
+  byte writeColon(void);
     
  private:
   uint8_t position;

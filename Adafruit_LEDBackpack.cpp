@@ -182,38 +182,39 @@ static const uint16_t alphafonttable[] PROGMEM =  {
 0b0011111111111111,
 
 };
-void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
+byte Adafruit_LEDBackpack::setBrightness(uint8_t b) {
   if (b > 15) b = 15;
   Wire.beginTransmission(i2c_addr);
   Wire.write(HT16K33_CMD_BRIGHTNESS | b);
-  Wire.endTransmission();  
+  return Wire.endTransmission();
 }
 
-void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
+byte Adafruit_LEDBackpack::blinkRate(uint8_t b) {
   Wire.beginTransmission(i2c_addr);
   if (b > 3) b = 0; // turn off if not sure
   
   Wire.write(HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON | (b << 1)); 
-  Wire.endTransmission();
+  return Wire.endTransmission();
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {
 }
 
-void Adafruit_LEDBackpack::begin(uint8_t _addr = 0x70) {
+byte Adafruit_LEDBackpack::begin(uint8_t _addr = 0x70) {
   i2c_addr = _addr;
 
   Wire.begin();
 
   Wire.beginTransmission(i2c_addr);
   Wire.write(0x21);  // turn on oscillator
-  Wire.endTransmission();
+  byte rv = Wire.endTransmission();
   blinkRate(HT16K33_BLINK_OFF);
   
   setBrightness(15); // max brightness
+  return rv;
 }
 
-void Adafruit_LEDBackpack::writeDisplay(void) {
+byte Adafruit_LEDBackpack::writeDisplay(void) {
   Wire.beginTransmission(i2c_addr);
   Wire.write((uint8_t)0x00); // start at address $00
 
@@ -221,7 +222,7 @@ void Adafruit_LEDBackpack::writeDisplay(void) {
     Wire.write(displaybuffer[i] & 0xFF);    
     Wire.write(displaybuffer[i] >> 8);    
   }
-  Wire.endTransmission();  
+  return Wire.endTransmission();
 }
 
 void Adafruit_LEDBackpack::clear(void) {
@@ -578,14 +579,14 @@ void Adafruit_7segment::drawColon(boolean state) {
     displaybuffer[2] = 0;
 }
 
-void Adafruit_7segment::writeColon(void) {
+byte Adafruit_7segment::writeColon(void) {
     Wire.beginTransmission(i2c_addr);
     Wire.write((uint8_t)0x04); // start at address $02
     
     Wire.write(displaybuffer[2] & 0xFF);
     Wire.write(displaybuffer[2] >> 8);
 
-    Wire.endTransmission();
+    return Wire.endTransmission();
 }
 
 void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
