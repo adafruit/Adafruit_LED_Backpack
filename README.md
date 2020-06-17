@@ -1,4 +1,4 @@
-# Adafruit-LED-Backpack-Library
+# Adafruit-LED-Backpack-Library [![Build Status](https://github.com/adafruit/Adafruit_LED_Backpack/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_LED_Backpack/actions)
 <!-- START COMPATIBILITY TABLE -->
 
 ## Compatibility
