@@ -287,7 +287,7 @@ public:
     @brief  Print from a String object to 7-segment display.
     @param  c  String object, passed by reference.
   */
-  void print(const String & c);
+  void print(const String &c);
 
   /*!
     @brief  Print from a C-style string array to 7-segment display.
@@ -348,7 +348,7 @@ public:
     @brief  Print from a String object w/newline to 7-segment display.
     @param  c  String object, passed by reference.
   */
-  void println(const String & c);
+  void println(const String &c);
 
   /*!
     @brief  Print from a C-style string array w/newline to 7-segment display.
