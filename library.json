@@ -1,0 +1,17 @@
+{
+  "name": "Adafruit-LED-Backpack",
+  "keywords": "led, display",
+  "description": "Adafruit LED Backpack Library for our 8x8 matrix and 7-segment LED backpacks",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/adafruit/Adafruit-LED-Backpack-Library.git"
+  },
+  "dependencies":
+  {
+    "name": "Adafruit GFX Library",
+    "frameworks": "arduino"
+  },
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}
