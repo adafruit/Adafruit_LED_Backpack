@@ -130,12 +130,14 @@ void loop() {
   // Add zero padding when in 24 hour mode and it's midnight.
   // In this case the print function above won't have leading 0's
   // which can look confusing.  Go in and explicitly add these zeros.
-  if (TIME_24_HOUR && hours == 0) {
+  if (TIME_24_HOUR) {
     // Pad hour 0.
-    clockDisplay.writeDigitNum(1, 0);
+    if(hours == 0){
+      clockDisplay.writeDigitNum(1, 0);
+    }
     // Also pad when the 10's minute is 0 and should be padded.
-    if (minutes < 10) {
-      clockDisplay.writeDigitNum(2, 0);
+    if (hours < 10) {
+      clockDisplay.writeDigitNum(0, 0);
     }
   }
 
