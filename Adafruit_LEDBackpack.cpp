@@ -202,7 +202,7 @@ void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
 
-void Adafruit_LEDBackpack::begin(uint8_t _addr = 0x70) {
+void Adafruit_LEDBackpack::begin(uint8_t _addr) {
   i2c_addr = _addr;
 
   Wire.begin();
