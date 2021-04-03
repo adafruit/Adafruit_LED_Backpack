@@ -65,7 +65,7 @@ public:
             brightness).
     @param  _addr  I2C address.
   */
-  void begin(uint8_t _addr);
+  void begin(uint8_t _addr = 0x70);
 
   /*!
     @brief  Set display brightness.
