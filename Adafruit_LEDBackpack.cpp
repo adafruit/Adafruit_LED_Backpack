@@ -53,23 +53,104 @@
   } ///< 16-bit var swap
 #endif
 
-static const uint8_t numbertable[] = {
-    0x3F, /* 0 */
-    0x06, /* 1 */
-    0x5B, /* 2 */
-    0x4F, /* 3 */
-    0x66, /* 4 */
-    0x6D, /* 5 */
-    0x7D, /* 6 */
-    0x07, /* 7 */
-    0x7F, /* 8 */
-    0x6F, /* 9 */
-    0x77, /* a */
-    0x7C, /* b */
-    0x39, /* C */
-    0x5E, /* d */
-    0x79, /* E */
-    0x71, /* F */
+static const uint8_t sevensegfonttable[] PROGMEM = {
+
+    0b00000000, // (space)
+    0b10000110, // !
+    0b00100010, // "
+    0b01111110, // #
+    0b01101101, // $
+    0b11010010, // %
+    0b01000110, // &
+    0b00100000, // '
+    0b00101001, // (
+    0b00001011, // )
+    0b00100001, // *
+    0b01110000, // +
+    0b00010000, // ,
+    0b01000000, // -
+    0b10000000, // .
+    0b01010010, // /
+    0b00111111, // 0
+    0b00000110, // 1
+    0b01011011, // 2
+    0b01001111, // 3
+    0b01100110, // 4
+    0b01101101, // 5
+    0b01111101, // 6
+    0b00000111, // 7
+    0b01111111, // 8
+    0b01101111, // 9
+    0b00001001, // :
+    0b00001101, // ;
+    0b01100001, // <
+    0b01001000, // =
+    0b01000011, // >
+    0b11010011, // ?
+    0b01011111, // @
+    0b01110111, // A
+    0b01111100, // B
+    0b00111001, // C
+    0b01011110, // D
+    0b01111001, // E
+    0b01110001, // F
+    0b00111101, // G
+    0b01110110, // H
+    0b00110000, // I
+    0b00011110, // J
+    0b01110101, // K
+    0b00111000, // L
+    0b00010101, // M
+    0b00110111, // N
+    0b00111111, // O
+    0b01110011, // P
+    0b01101011, // Q
+    0b00110011, // R
+    0b01101101, // S
+    0b01111000, // T
+    0b00111110, // U
+    0b00111110, // V
+    0b00101010, // W
+    0b01110110, // X
+    0b01101110, // Y
+    0b01011011, // Z
+    0b00111001, // [
+    0b01100100, //
+    0b00001111, // ]
+    0b00100011, // ^
+    0b00001000, // _
+    0b00000010, // `
+    0b01011111, // a
+    0b01111100, // b
+    0b01011000, // c
+    0b01011110, // d
+    0b01111011, // e
+    0b01110001, // f
+    0b01101111, // g
+    0b01110100, // h
+    0b00010000, // i
+    0b00001100, // j
+    0b01110101, // k
+    0b00110000, // l
+    0b00010100, // m
+    0b01010100, // n
+    0b01011100, // o
+    0b01110011, // p
+    0b01100111, // q
+    0b01010000, // r
+    0b01101101, // s
+    0b01111000, // t
+    0b00011100, // u
+    0b00011100, // v
+    0b00010100, // w
+    0b01110110, // x
+    0b01101110, // y
+    0b01011011, // z
+    0b01000110, // {
+    0b00110000, // |
+    0b01110000, // }
+    0b00000001, // ~
+    0b00000000, // del
 };
 
 static const uint16_t alphafonttable[] PROGMEM = {
@@ -478,14 +559,18 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
 Adafruit_7segment::Adafruit_7segment(void) { position = 0; }
 
+void Adafruit_7segment::print(const String &c) { write(c.c_str(), c.length()); }
+
+void Adafruit_7segment::print(const char c[]) { write(c, strlen(c)); }
+
+void Adafruit_7segment::print(char c) { write(c); }
+
 void Adafruit_7segment::print(unsigned long n, int base) {
   if (base == 0)
     write(n);
   else
     printNumber(n, base);
 }
-
-void Adafruit_7segment::print(char c, int base) { print((long)c, base); }
 
 void Adafruit_7segment::print(unsigned char b, int base) {
   print((unsigned long)b, base);
@@ -499,8 +584,18 @@ void Adafruit_7segment::print(unsigned int n, int base) {
 
 void Adafruit_7segment::println(void) { position = 0; }
 
-void Adafruit_7segment::println(char c, int base) {
-  print(c, base);
+void Adafruit_7segment::println(const String &c) {
+  print(c);
+  println();
+}
+
+void Adafruit_7segment::println(const char c[]) {
+  print(c);
+  println();
+}
+
+void Adafruit_7segment::println(char c) {
+  print(c);
   println();
 }
 
@@ -536,7 +631,7 @@ void Adafruit_7segment::println(double n, int digits) {
 
 void Adafruit_7segment::print(double n, int digits) { printFloat(n, digits); }
 
-size_t Adafruit_7segment::write(uint8_t c) {
+size_t Adafruit_7segment::write(char c) {
 
   uint8_t r = 0;
 
@@ -545,8 +640,8 @@ size_t Adafruit_7segment::write(uint8_t c) {
   if (c == '\r')
     position = 0;
 
-  if ((c >= '0') && (c <= '9')) {
-    writeDigitNum(position, c - '0');
+  if ((c >= ' ') && (c <= 127)) {
+    writeDigitChar(position, c);
     r = 1;
   }
 
@@ -555,6 +650,22 @@ size_t Adafruit_7segment::write(uint8_t c) {
     position++;
 
   return r;
+}
+
+size_t Adafruit_7segment::write(const char *buffer, size_t size) {
+  size_t n = 0;
+
+  while (n < size) {
+    write(buffer[n]);
+    n++;
+  }
+
+  // Clear unwritten positions
+  for (uint8_t i = position; i < 5; i++) {
+    writeDigitRaw(i, 0x00);
+  }
+
+  return n;
 }
 
 void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
@@ -580,11 +691,44 @@ void Adafruit_7segment::writeColon(void) {
   Wire.endTransmission();
 }
 
-void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, bool dot) {
+void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
+  if (d > 4 || num > 15)
+    return;
+
+  if (num >= 10) { // Hex characters
+    switch (num) {
+    case 10:
+      writeDigitChar(d, 'a', dot);
+      break;
+    case 11:
+      writeDigitChar(d, 'B', dot);
+      break;
+    case 12:
+      writeDigitChar(d, 'C', dot);
+      break;
+    case 13:
+      writeDigitChar(d, 'd', dot);
+      break;
+    case 14:
+      writeDigitChar(d, 'E', dot);
+      break;
+    case 15:
+      writeDigitChar(d, 'F', dot);
+      break;
+    }
+  }
+
+  else
+    writeDigitChar(d, num + 48, dot); // use ASCII offset
+}
+
+void Adafruit_7segment::writeDigitChar(uint8_t d, char c, boolean dot) {
   if (d > 4)
     return;
 
-  writeDigitRaw(d, numbertable[num] | (dot << 7));
+  uint8_t font = pgm_read_byte(sevensegfonttable + c - 32);
+
+  writeDigitRaw(d, font | (dot << 7));
 }
 
 void Adafruit_7segment::print(long n, int base) { printNumber(n, base); }
