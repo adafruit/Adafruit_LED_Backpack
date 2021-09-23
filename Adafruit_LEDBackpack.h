@@ -64,6 +64,9 @@ public:
     @brief  Start I2C and initialize display state (blink off, full
             brightness).
     @param  _addr  I2C address.
+    @param  theWire  TwoWire bus reference to use.
+    @return  true if successful, otherwise false
+
   */
   bool begin(uint8_t _addr = 0x70, TwoWire *theWire = &Wire);
 
