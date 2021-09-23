@@ -28,7 +28,7 @@
 #include "WProgram.h"
 #endif
 
-#include <Wire.h>
+#include <Adafruit_I2CDevice.h>
 
 #include "Adafruit_GFX.h"
 
@@ -65,7 +65,7 @@ public:
             brightness).
     @param  _addr  I2C address.
   */
-  void begin(uint8_t _addr = 0x70);
+  bool begin(uint8_t _addr = 0x70, TwoWire *theWire = &Wire);
 
   /*!
     @brief  Set display brightness.
@@ -97,7 +97,7 @@ public:
   uint16_t displaybuffer[8]; ///< Raw display data
 
 protected:
-  uint8_t i2c_addr; ///< Device I2C address
+  Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
 };
 
 /*!
