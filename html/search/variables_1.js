@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['i2c_5faddr',['i2c_addr',['../class_adafruit___l_e_d_backpack.html#a4478d9a0fff44bf29fe710a39b3d7a40',1,'Adafruit_LEDBackpack']]]
+  ['i2c_5fdev',['i2c_dev',['../class_adafruit___l_e_d_backpack.html#a3f487b5f1e8eca95c223d92df8d9347e',1,'Adafruit_LEDBackpack']]]
 ];
