@@ -50,7 +50,7 @@ void loop() {
   matrix.writeDisplay();
   delay(500);
 
-  // print a string
+  // print a string message
   matrix.print("7SEG");
   matrix.writeDisplay();
   delay(10000);
