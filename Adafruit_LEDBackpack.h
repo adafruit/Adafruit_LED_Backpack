@@ -385,7 +385,7 @@ public:
     @param  c    Character (ASCII).
     @param  dot  If true, light corresponding decimal.
   */
-  void writeDigitChar(uint8_t x, char c, bool dot = false);
+  void writeDigitAscii(uint8_t x, char c, bool dot = false);
 
   /*!
     @brief  Set or unset colon segment.

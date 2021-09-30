@@ -639,7 +639,7 @@ size_t Adafruit_7segment::write(char c) {
     position = 0;
 
   if ((c >= ' ') && (c <= 127)) {
-    writeDigitChar(position, c);
+    writeDigitAscii(position, c);
     r = 1;
   }
 
@@ -696,31 +696,31 @@ void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
   if (num >= 10) { // Hex characters
     switch (num) {
     case 10:
-      writeDigitChar(d, 'a', dot);
+      writeDigitAscii(d, 'a', dot);
       break;
     case 11:
-      writeDigitChar(d, 'B', dot);
+      writeDigitAscii(d, 'B', dot);
       break;
     case 12:
-      writeDigitChar(d, 'C', dot);
+      writeDigitAscii(d, 'C', dot);
       break;
     case 13:
-      writeDigitChar(d, 'd', dot);
+      writeDigitAscii(d, 'd', dot);
       break;
     case 14:
-      writeDigitChar(d, 'E', dot);
+      writeDigitAscii(d, 'E', dot);
       break;
     case 15:
-      writeDigitChar(d, 'F', dot);
+      writeDigitAscii(d, 'F', dot);
       break;
     }
   }
 
   else
-    writeDigitChar(d, num + 48, dot); // use ASCII offset
+    writeDigitAscii(d, num + 48, dot); // use ASCII offset
 }
 
-void Adafruit_7segment::writeDigitChar(uint8_t d, char c, boolean dot) {
+void Adafruit_7segment::writeDigitAscii(uint8_t d, char c, boolean dot) {
   if (d > 4)
     return;
 
