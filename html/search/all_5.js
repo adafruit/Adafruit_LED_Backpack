@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['hex',['HEX',['../_adafruit___l_e_d_backpack_8h.html#a9075d93e0ab26ccd6e059fa06aa4e3de',1,'Adafruit_LEDBackpack.h']]],
   ['ht16k33_5fblink_5f1hz',['HT16K33_BLINK_1HZ',['../_adafruit___l_e_d_backpack_8h.html#a94f162a076f4f17d869eb93689897eac',1,'Adafruit_LEDBackpack.h']]],
   ['ht16k33_5fblink_5f2hz',['HT16K33_BLINK_2HZ',['../_adafruit___l_e_d_backpack_8h.html#a1d5927a7ca671294e0259dbc3ca87e2b',1,'Adafruit_LEDBackpack.h']]],
   ['ht16k33_5fblink_5fcmd',['HT16K33_BLINK_CMD',['../_adafruit___l_e_d_backpack_8h.html#aeb60d0ffe0a4c33d7ce5fdec022c8f1c',1,'Adafruit_LEDBackpack.h']]],
