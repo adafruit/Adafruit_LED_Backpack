@@ -149,7 +149,7 @@ static const PROGMEM uint8_t sevensegfonttable[] = {
     0b01110000, // }
     0b00000001, // ~
     0b00000000, // del
-}; 
+};
 
 static const PROGMEM uint16_t alphafonttable[] = {
 

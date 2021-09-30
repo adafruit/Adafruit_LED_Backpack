@@ -209,8 +209,8 @@ public:
 
 #define DEC 10 ///< Print value in decimal format (base 10)
 #define HEX 16 ///< Print value in hexadecimal format (base 16)
-#define OCT 8  ///< Print value in octal format (base 8)
-#define BIN 2  ///< Print value in binary format (base 2)
+#define OCT 8 ///< Print value in octal format (base 8)
+#define BIN 2 ///< Print value in binary format (base 2)
 #define BYTE 0 ///< Issue 7-segment data as raw bits
 
 /*!
