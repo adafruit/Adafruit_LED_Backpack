@@ -51,7 +51,7 @@
   } ///< 16-bit var swap
 #endif
 
-static const uint8_t sevensegfonttable[] PROGMEM = {
+static const PROGMEM uint8_t sevensegfonttable[] = {
 
     0b00000000, // (space)
     0b10000110, // !
@@ -149,9 +149,9 @@ static const uint8_t sevensegfonttable[] PROGMEM = {
     0b01110000, // }
     0b00000001, // ~
     0b00000000, // del
-};
+}; 
 
-static const uint16_t alphafonttable[] PROGMEM = {
+static const PROGMEM uint16_t alphafonttable[] = {
 
     0b0000000000000001, 0b0000000000000010, 0b0000000000000100,
     0b0000000000001000, 0b0000000000010000, 0b0000000000100000,
