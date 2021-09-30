@@ -720,7 +720,7 @@ void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
     writeDigitAscii(d, num + 48, dot); // use ASCII offset
 }
 
-void Adafruit_7segment::writeDigitAscii(uint8_t d, char c, boolean dot) {
+void Adafruit_7segment::writeDigitAscii(uint8_t d, uint8_t c, boolean dot) {
   if (d > 4)
     return;
 
