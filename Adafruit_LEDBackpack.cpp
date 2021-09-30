@@ -178,7 +178,7 @@ static const PROGMEM uint16_t alphafonttable[] = {
     0b0001001011000000, // +
     0b0000100000000000, // ,
     0b0000000011000000, // -
-    0b0000000000000000, // .
+    0b0100000000000000, // .
     0b0000110000000000, // /
     0b0000110000111111, // 0
     0b0000000000000110, // 1
@@ -263,14 +263,17 @@ static const PROGMEM uint16_t alphafonttable[] = {
 
 };
 void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
-  uint8_t buffer[1] = {HT16K33_CMD_BRIGHTNESS | (b > 15 ? 15 : b)};
-  i2c_dev->write(buffer, 1);
+  if (b > 15)
+    b = 15; // limit to max brightness
+  uint8_t buffer = HT16K33_CMD_BRIGHTNESS | b;
+  i2c_dev->write(&buffer, 1);
 }
 
 void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
-  uint8_t buffer[1] = {HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON |
-                       ((b > 3 ? 0 : b) << 1)};
-  i2c_dev->write(buffer, 1);
+  if (b > 3)
+    b = 0; // turn off if not sure
+  uint8_t buffer = HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON | (b << 1);
+  i2c_dev->write(&buffer, 1);
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
