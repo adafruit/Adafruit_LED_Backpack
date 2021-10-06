@@ -86,12 +86,15 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#ab8eca1264941f34b84c4d5ea8f84dec2">Adafruit_7segment</a> (void)</td></tr>
 <tr class="memdesc:ab8eca1264941f34b84c4d5ea8f84dec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for 7-segment numeric displays. <br /></td></tr>
 <tr class="separator:ab8eca1264941f34b84c4d5ea8f84dec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66759fcb5fc31e3c803adbd0759c4086"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a66759fcb5fc31e3c803adbd0759c4086">write</a> (uint8_t c)</td></tr>
-<tr class="memdesc:a66759fcb5fc31e3c803adbd0759c4086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Issue single digit to display.  <a href="#a66759fcb5fc31e3c803adbd0759c4086">More...</a><br /></td></tr>
-<tr class="separator:a66759fcb5fc31e3c803adbd0759c4086"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb56eaf80066a8134130444ace169d87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#aeb56eaf80066a8134130444ace169d87">print</a> (char c, int base=<a class="el" href="_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa">RAW_BITS</a>)</td></tr>
-<tr class="memdesc:aeb56eaf80066a8134130444ace169d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print byte-size numeric value to 7-segment display.  <a href="#aeb56eaf80066a8134130444ace169d87">More...</a><br /></td></tr>
-<tr class="separator:aeb56eaf80066a8134130444ace169d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a752d7b8d8fb04060f18704b4283431"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a0a752d7b8d8fb04060f18704b4283431">write</a> (char c)</td></tr>
+<tr class="memdesc:a0a752d7b8d8fb04060f18704b4283431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Issue single character to display.  <a href="#a0a752d7b8d8fb04060f18704b4283431">More...</a><br /></td></tr>
+<tr class="separator:a0a752d7b8d8fb04060f18704b4283431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad492f6078ecf835eec926ef9cf67b60e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#ad492f6078ecf835eec926ef9cf67b60e">write</a> (const char *buffer, size_t size)</td></tr>
+<tr class="memdesc:ad492f6078ecf835eec926ef9cf67b60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write characters from buffer to display.  <a href="#ad492f6078ecf835eec926ef9cf67b60e">More...</a><br /></td></tr>
+<tr class="separator:ad492f6078ecf835eec926ef9cf67b60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28a80849779dd4b6f07ecd726b0eaf5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a28a80849779dd4b6f07ecd726b0eaf5b">print</a> (char c)</td></tr>
+<tr class="memdesc:a28a80849779dd4b6f07ecd726b0eaf5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print byte-size numeric value to 7-segment display.  <a href="#a28a80849779dd4b6f07ecd726b0eaf5b">More...</a><br /></td></tr>
+<tr class="separator:a28a80849779dd4b6f07ecd726b0eaf5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b26cb90333bcad2ee06c6b52732f4de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a8b26cb90333bcad2ee06c6b52732f4de">print</a> (unsigned char b, int base=<a class="el" href="_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa">RAW_BITS</a>)</td></tr>
 <tr class="memdesc:a8b26cb90333bcad2ee06c6b52732f4de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print unsigned byte-size numeric value to 7-segment display.  <a href="#a8b26cb90333bcad2ee06c6b52732f4de">More...</a><br /></td></tr>
 <tr class="separator:a8b26cb90333bcad2ee06c6b52732f4de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,9 +113,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a30fd808d3affd797ab1baf36fa5c1810"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a30fd808d3affd797ab1baf36fa5c1810">print</a> (double n, int digits=2)</td></tr>
 <tr class="memdesc:a30fd808d3affd797ab1baf36fa5c1810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print double-precision float value to 7-segment display.  <a href="#a30fd808d3affd797ab1baf36fa5c1810">More...</a><br /></td></tr>
 <tr class="separator:a30fd808d3affd797ab1baf36fa5c1810"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a445ae37df53c2d17c1dacf22fe712ba9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a445ae37df53c2d17c1dacf22fe712ba9">println</a> (char c, int base=<a class="el" href="_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa">RAW_BITS</a>)</td></tr>
-<tr class="memdesc:a445ae37df53c2d17c1dacf22fe712ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print byte-size numeric value w/newline to 7-segment display.  <a href="#a445ae37df53c2d17c1dacf22fe712ba9">More...</a><br /></td></tr>
-<tr class="separator:a445ae37df53c2d17c1dacf22fe712ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa2407a43e8ce83249f8cf7528fe904"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#abaa2407a43e8ce83249f8cf7528fe904">print</a> (const String &amp;c)</td></tr>
+<tr class="memdesc:abaa2407a43e8ce83249f8cf7528fe904"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print from a String object to 7-segment display.  <a href="#abaa2407a43e8ce83249f8cf7528fe904">More...</a><br /></td></tr>
+<tr class="separator:abaa2407a43e8ce83249f8cf7528fe904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cfccdd5ad2cc4ca816cfdabd947cec5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a1cfccdd5ad2cc4ca816cfdabd947cec5">print</a> (const char c[])</td></tr>
+<tr class="memdesc:a1cfccdd5ad2cc4ca816cfdabd947cec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print from a C-style string array to 7-segment display.  <a href="#a1cfccdd5ad2cc4ca816cfdabd947cec5">More...</a><br /></td></tr>
+<tr class="separator:a1cfccdd5ad2cc4ca816cfdabd947cec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb3cf95ca77c7008dc1195d6dca85e19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#afb3cf95ca77c7008dc1195d6dca85e19">println</a> (char c)</td></tr>
+<tr class="memdesc:afb3cf95ca77c7008dc1195d6dca85e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print byte-size numeric value w/newline to 7-segment display.  <a href="#afb3cf95ca77c7008dc1195d6dca85e19">More...</a><br /></td></tr>
+<tr class="separator:afb3cf95ca77c7008dc1195d6dca85e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42f3964b401c68d13a3fe3f6f511c161"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a42f3964b401c68d13a3fe3f6f511c161">println</a> (unsigned char b, int base=<a class="el" href="_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa">RAW_BITS</a>)</td></tr>
 <tr class="memdesc:a42f3964b401c68d13a3fe3f6f511c161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print unsigned byte-size numeric value w/newline to 7-segment display.  <a href="#a42f3964b401c68d13a3fe3f6f511c161">More...</a><br /></td></tr>
 <tr class="separator:a42f3964b401c68d13a3fe3f6f511c161"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,6 +140,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a68555a14eef40b1b7dd0e1aca25559a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a68555a14eef40b1b7dd0e1aca25559a9">println</a> (double n, int digits=2)</td></tr>
 <tr class="memdesc:a68555a14eef40b1b7dd0e1aca25559a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print double-precision float value to 7-segment display.  <a href="#a68555a14eef40b1b7dd0e1aca25559a9">More...</a><br /></td></tr>
 <tr class="separator:a68555a14eef40b1b7dd0e1aca25559a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18f3732270d75509af4ca7ba484dde7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#ad18f3732270d75509af4ca7ba484dde7">println</a> (const String &amp;c)</td></tr>
+<tr class="memdesc:ad18f3732270d75509af4ca7ba484dde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print from a String object w/newline to 7-segment display.  <a href="#ad18f3732270d75509af4ca7ba484dde7">More...</a><br /></td></tr>
+<tr class="separator:ad18f3732270d75509af4ca7ba484dde7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2ced8473359a9daf25e477d538e5a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a3f2ced8473359a9daf25e477d538e5a7">println</a> (const char c[])</td></tr>
+<tr class="memdesc:a3f2ced8473359a9daf25e477d538e5a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print from a C-style string array w/newline to 7-segment display.  <a href="#a3f2ced8473359a9daf25e477d538e5a7">More...</a><br /></td></tr>
+<tr class="separator:a3f2ced8473359a9daf25e477d538e5a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58cbe913565eb167e089a030d5921941"><td class="memItemLeft" align="right" valign="top"><a id="a58cbe913565eb167e089a030d5921941"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a58cbe913565eb167e089a030d5921941">println</a> (void)</td></tr>
 <tr class="memdesc:a58cbe913565eb167e089a030d5921941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print newline to 7-segment display (rewind position to start). <br /></td></tr>
@@ -141,14 +156,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a279224a72edaee4f38ac8d1f1dc41391"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a279224a72edaee4f38ac8d1f1dc41391">writeDigitNum</a> (uint8_t x, uint8_t num, bool dot=false)</td></tr>
 <tr class="memdesc:a279224a72edaee4f38ac8d1f1dc41391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set specific digit # to a numeric value.  <a href="#a279224a72edaee4f38ac8d1f1dc41391">More...</a><br /></td></tr>
 <tr class="separator:a279224a72edaee4f38ac8d1f1dc41391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b6ee7ad773c6a229aa0bd75953223d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a3b6ee7ad773c6a229aa0bd75953223d0">writeDigitAscii</a> (uint8_t x, uint8_t c, bool dot=false)</td></tr>
+<tr class="memdesc:a3b6ee7ad773c6a229aa0bd75953223d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set specific digit # to a character value.  <a href="#a3b6ee7ad773c6a229aa0bd75953223d0">More...</a><br /></td></tr>
+<tr class="separator:a3b6ee7ad773c6a229aa0bd75953223d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71e06c479c5e021680fca13014b19ce4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a71e06c479c5e021680fca13014b19ce4">drawColon</a> (bool state)</td></tr>
 <tr class="memdesc:a71e06c479c5e021680fca13014b19ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set or unset colon segment.  <a href="#a71e06c479c5e021680fca13014b19ce4">More...</a><br /></td></tr>
 <tr class="separator:a71e06c479c5e021680fca13014b19ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae79f381c71f22e3f1ddda271f0c860f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#ae79f381c71f22e3f1ddda271f0c860f3">printNumber</a> (long n, uint8_t base=2)</td></tr>
-<tr class="memdesc:ae79f381c71f22e3f1ddda271f0c860f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">General integer-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#aeb56eaf80066a8134130444ace169d87" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants.  <a href="#ae79f381c71f22e3f1ddda271f0c860f3">More...</a><br /></td></tr>
+<tr class="memdesc:ae79f381c71f22e3f1ddda271f0c860f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">General integer-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#a28a80849779dd4b6f07ecd726b0eaf5b" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants.  <a href="#ae79f381c71f22e3f1ddda271f0c860f3">More...</a><br /></td></tr>
 <tr class="separator:ae79f381c71f22e3f1ddda271f0c860f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a798bd500848ea6894ad4112310663a49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a798bd500848ea6894ad4112310663a49">printFloat</a> (double n, uint8_t fracDigits=2, uint8_t base=DEC)</td></tr>
-<tr class="memdesc:a798bd500848ea6894ad4112310663a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">General float-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#aeb56eaf80066a8134130444ace169d87" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants.  <a href="#a798bd500848ea6894ad4112310663a49">More...</a><br /></td></tr>
+<tr class="memdesc:a798bd500848ea6894ad4112310663a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">General float-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#a28a80849779dd4b6f07ecd726b0eaf5b" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants.  <a href="#a798bd500848ea6894ad4112310663a49">More...</a><br /></td></tr>
 <tr class="separator:a798bd500848ea6894ad4112310663a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a517fbef73e990854099617c70a32ab20"><td class="memItemLeft" align="right" valign="top"><a id="a517fbef73e990854099617c70a32ab20"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit__7segment.html#a517fbef73e990854099617c70a32ab20">printError</a> (void)</td></tr>
@@ -197,8 +215,8 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for 7-segment numeric displays. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a66759fcb5fc31e3c803adbd0759c4086"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66759fcb5fc31e3c803adbd0759c4086">&#9670;&nbsp;</a></span>write()</h2>
+<a id="a0a752d7b8d8fb04060f18704b4283431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a752d7b8d8fb04060f18704b4283431">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,41 +224,41 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
         <tr>
           <td class="memname">size_t Adafruit_7segment::write </td>
           <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype">char&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Issue single digit to display. </p>
+<p>Issue single character to display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">c</td><td>Digit to write (ASCII character, not numeric). </td></tr>
+    <tr><td class="paramname">c</td><td>Character to write (ASCII character, not numeric). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 if character written, else 0 (non-digit characters). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if character written, else 0 (non-ASCII characters). </dd></dl>
 
 </div>
 </div>
-<a id="aeb56eaf80066a8134130444ace169d87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb56eaf80066a8134130444ace169d87">&#9670;&nbsp;</a></span>print() <span class="overload">[1/7]</span></h2>
+<a id="ad492f6078ecf835eec926ef9cf67b60e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad492f6078ecf835eec926ef9cf67b60e">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Adafruit_7segment::print </td>
+          <td class="memname">size_t Adafruit_7segment::write </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>c</em>, </td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>base</em> = <code><a class="el" href="_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa">RAW_BITS</a></code>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -250,11 +268,38 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
       </table>
 </div><div class="memdoc">
 
+<p>Write characters from buffer to display. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Character array to write </td></tr>
+    <tr><td class="paramname">size</td><td>Number of characters to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of characters written </dd></dl>
+
+</div>
+</div>
+<a id="a28a80849779dd4b6f07ecd726b0eaf5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28a80849779dd4b6f07ecd726b0eaf5b">&#9670;&nbsp;</a></span>print() <span class="overload">[1/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_7segment::print </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 <p>Print byte-size numeric value to 7-segment display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>Numeric value. </td></tr>
-    <tr><td class="paramname">base</td><td>Number base (default = RAW_BITS = raw bits) </td></tr>
   </table>
   </dd>
 </dl>
@@ -262,7 +307,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a8b26cb90333bcad2ee06c6b52732f4de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b26cb90333bcad2ee06c6b52732f4de">&#9670;&nbsp;</a></span>print() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b26cb90333bcad2ee06c6b52732f4de">&#9670;&nbsp;</a></span>print() <span class="overload">[2/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -299,7 +344,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a65f98bc225a706ef81810edbb4b2bd45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65f98bc225a706ef81810edbb4b2bd45">&#9670;&nbsp;</a></span>print() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f98bc225a706ef81810edbb4b2bd45">&#9670;&nbsp;</a></span>print() <span class="overload">[3/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -336,7 +381,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="ac9173c19305cf3a53edfd54db2b447ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9173c19305cf3a53edfd54db2b447ab">&#9670;&nbsp;</a></span>print() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9173c19305cf3a53edfd54db2b447ab">&#9670;&nbsp;</a></span>print() <span class="overload">[4/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,7 +418,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a99a58da7efe13949d6e3438b600a2ae0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99a58da7efe13949d6e3438b600a2ae0">&#9670;&nbsp;</a></span>print() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a58da7efe13949d6e3438b600a2ae0">&#9670;&nbsp;</a></span>print() <span class="overload">[5/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,7 +455,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a0b2b418a2bf0ace49f827392303d2b43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b2b418a2bf0ace49f827392303d2b43">&#9670;&nbsp;</a></span>print() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2b418a2bf0ace49f827392303d2b43">&#9670;&nbsp;</a></span>print() <span class="overload">[6/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -447,7 +492,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a30fd808d3affd797ab1baf36fa5c1810"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30fd808d3affd797ab1baf36fa5c1810">&#9670;&nbsp;</a></span>print() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a30fd808d3affd797ab1baf36fa5c1810">&#9670;&nbsp;</a></span>print() <span class="overload">[7/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,8 +528,60 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 
 </div>
 </div>
-<a id="a445ae37df53c2d17c1dacf22fe712ba9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a445ae37df53c2d17c1dacf22fe712ba9">&#9670;&nbsp;</a></span>println() <span class="overload">[1/7]</span></h2>
+<a id="abaa2407a43e8ce83249f8cf7528fe904"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaa2407a43e8ce83249f8cf7528fe904">&#9670;&nbsp;</a></span>print() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_7segment::print </td>
+          <td>(</td>
+          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print from a String object to 7-segment display. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>String object, passed by reference. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1cfccdd5ad2cc4ca816cfdabd947cec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cfccdd5ad2cc4ca816cfdabd947cec5">&#9670;&nbsp;</a></span>print() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_7segment::print </td>
+          <td>(</td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>c</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print from a C-style string array to 7-segment display. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Array of characters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afb3cf95ca77c7008dc1195d6dca85e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb3cf95ca77c7008dc1195d6dca85e19">&#9670;&nbsp;</a></span>println() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -493,18 +590,8 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
           <td class="memname">void Adafruit_7segment::println </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>c</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>base</em> = <code><a class="el" href="_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa">RAW_BITS</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -513,7 +600,6 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>Numeric value. </td></tr>
-    <tr><td class="paramname">base</td><td>Number base (default = RAW_BITS = raw bits) </td></tr>
   </table>
   </dd>
 </dl>
@@ -521,7 +607,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a42f3964b401c68d13a3fe3f6f511c161"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42f3964b401c68d13a3fe3f6f511c161">&#9670;&nbsp;</a></span>println() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42f3964b401c68d13a3fe3f6f511c161">&#9670;&nbsp;</a></span>println() <span class="overload">[2/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,7 +644,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="ac1dfcc460de975386fa90f48dbc445f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1dfcc460de975386fa90f48dbc445f2">&#9670;&nbsp;</a></span>println() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1dfcc460de975386fa90f48dbc445f2">&#9670;&nbsp;</a></span>println() <span class="overload">[3/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,7 +681,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a519deba6006d1aa62b3ee62dfecae1b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a519deba6006d1aa62b3ee62dfecae1b6">&#9670;&nbsp;</a></span>println() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a519deba6006d1aa62b3ee62dfecae1b6">&#9670;&nbsp;</a></span>println() <span class="overload">[4/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -632,7 +718,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a08e173dffc87a6288bbd117e9d5db310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08e173dffc87a6288bbd117e9d5db310">&#9670;&nbsp;</a></span>println() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e173dffc87a6288bbd117e9d5db310">&#9670;&nbsp;</a></span>println() <span class="overload">[5/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -669,7 +755,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a42fad9ad69a91f19cda3eeff8bd98432"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42fad9ad69a91f19cda3eeff8bd98432">&#9670;&nbsp;</a></span>println() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42fad9ad69a91f19cda3eeff8bd98432">&#9670;&nbsp;</a></span>println() <span class="overload">[6/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -706,7 +792,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div>
 </div>
 <a id="a68555a14eef40b1b7dd0e1aca25559a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68555a14eef40b1b7dd0e1aca25559a9">&#9670;&nbsp;</a></span>println() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a68555a14eef40b1b7dd0e1aca25559a9">&#9670;&nbsp;</a></span>println() <span class="overload">[7/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -736,6 +822,58 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
   <table class="params">
     <tr><td class="paramname">n</td><td>Numeric value. </td></tr>
     <tr><td class="paramname">digits</td><td>Fractional-part digits. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad18f3732270d75509af4ca7ba484dde7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18f3732270d75509af4ca7ba484dde7">&#9670;&nbsp;</a></span>println() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_7segment::println </td>
+          <td>(</td>
+          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print from a String object w/newline to 7-segment display. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>String object, passed by reference. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3f2ced8473359a9daf25e477d538e5a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2ced8473359a9daf25e477d538e5a7">&#9670;&nbsp;</a></span>println() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_7segment::println </td>
+          <td>(</td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>c</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print from a C-style string array w/newline to 7-segment display. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Array of characters. </td></tr>
   </table>
   </dd>
 </dl>
@@ -823,6 +961,50 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
 
 </div>
 </div>
+<a id="a3b6ee7ad773c6a229aa0bd75953223d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b6ee7ad773c6a229aa0bd75953223d0">&#9670;&nbsp;</a></span>writeDigitAscii()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Adafruit_7segment::writeDigitAscii </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dot</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set specific digit # to a character value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Character position. </td></tr>
+    <tr><td class="paramname">c</td><td>Character (ASCII). </td></tr>
+    <tr><td class="paramname">dot</td><td>If true, light corresponding decimal. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a71e06c479c5e021680fca13014b19ce4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71e06c479c5e021680fca13014b19ce4">&#9670;&nbsp;</a></span>drawColon()</h2>
 
@@ -875,7 +1057,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
       </table>
 </div><div class="memdoc">
 
-<p>General integer-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#aeb56eaf80066a8134130444ace169d87" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants. </p>
+<p>General integer-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#a28a80849779dd4b6f07ecd726b0eaf5b" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>Numeric value. </td></tr>
@@ -918,7 +1100,7 @@ Adafruit_I2CDevice *&#160;</td><td class="memItemRight" valign="bottom"><a class
       </table>
 </div><div class="memdoc">
 
-<p>General float-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#aeb56eaf80066a8134130444ace169d87" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants. </p>
+<p>General float-printing function used by some of the <a class="el" href="class_adafruit__7segment.html#a28a80849779dd4b6f07ecd726b0eaf5b" title="Print byte-size numeric value to 7-segment display. ">print()</a> variants. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>Numeric value. </td></tr>
