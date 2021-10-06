@@ -49,6 +49,11 @@ void loop() {
   matrix.print(12.34);
   matrix.writeDisplay();
   delay(500);
+
+  // print a string message
+  matrix.print("7SEG");
+  matrix.writeDisplay();
+  delay(10000);
   
   // print with print/println
   for (uint16_t counter = 0; counter < 9999; counter++) {

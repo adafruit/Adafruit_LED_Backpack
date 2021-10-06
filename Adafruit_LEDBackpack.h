@@ -220,18 +220,25 @@ public:
   Adafruit_7segment(void);
 
   /*!
-    @brief   Issue single digit to display.
-    @param   c  Digit to write (ASCII character, not numeric).
-    @return  1 if character written, else 0 (non-digit characters).
+    @brief   Issue single character to display.
+    @param   c Character to write (ASCII character, not numeric).
+    @return  1 if character written, else 0 (non-ASCII characters).
   */
-  size_t write(uint8_t c);
+  size_t write(char c);
+
+  /*!
+    @brief   Write characters from buffer to display.
+    @param   buffer Character array to write
+    @param   size   Number of characters to write
+    @return  Number of characters written
+  */
+  size_t write(const char *buffer, size_t size);
 
   /*!
     @brief  Print byte-size numeric value to 7-segment display.
     @param  c     Numeric value.
-    @param  base  Number base (default = RAW_BITS = raw bits)
   */
-  void print(char c, int base = RAW_BITS);
+  void print(char c);
 
   /*!
     @brief  Print unsigned byte-size numeric value to 7-segment display.
@@ -276,11 +283,22 @@ public:
   void print(double n, int digits = 2);
 
   /*!
+    @brief  Print from a String object to 7-segment display.
+    @param  c  String object, passed by reference.
+  */
+  void print(const String &c);
+
+  /*!
+    @brief  Print from a C-style string array to 7-segment display.
+    @param  c  Array of characters.
+  */
+  void print(const char c[]);
+
+  /*!
     @brief  Print byte-size numeric value w/newline to 7-segment display.
     @param  c     Numeric value.
-    @param  base  Number base (default = RAW_BITS = raw bits)
   */
-  void println(char c, int base = RAW_BITS);
+  void println(char c);
 
   /*!
     @brief  Print unsigned byte-size numeric value w/newline to 7-segment
@@ -326,6 +344,18 @@ public:
   void println(double n, int digits = 2);
 
   /*!
+    @brief  Print from a String object w/newline to 7-segment display.
+    @param  c  String object, passed by reference.
+  */
+  void println(const String &c);
+
+  /*!
+    @brief  Print from a C-style string array w/newline to 7-segment display.
+    @param  c  Array of characters.
+  */
+  void println(const char c[]);
+
+  /*!
     @brief  Print newline to 7-segment display (rewind position to start).
   */
   void println(void);
@@ -344,6 +374,14 @@ public:
     @param  dot  If true, light corresponding decimal.
   */
   void writeDigitNum(uint8_t x, uint8_t num, bool dot = false);
+
+  /*!
+    @brief  Set specific digit # to a character value.
+    @param  x    Character position.
+    @param  c    Character (ASCII).
+    @param  dot  If true, light corresponding decimal.
+  */
+  void writeDigitAscii(uint8_t x, uint8_t c, bool dot = false);
 
   /*!
     @brief  Set or unset colon segment.
