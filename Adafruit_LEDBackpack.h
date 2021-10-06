@@ -237,9 +237,8 @@ public:
   /*!
     @brief  Print byte-size numeric value to 7-segment display.
     @param  c     Numeric value.
-    @param  base  Number base (default = RAW_BITS = raw bits)
   */
-  void print(char c, int base = RAW_BITS);
+  void print(char c);
 
   /*!
     @brief  Print unsigned byte-size numeric value to 7-segment display.
@@ -298,9 +297,8 @@ public:
   /*!
     @brief  Print byte-size numeric value w/newline to 7-segment display.
     @param  c     Numeric value.
-    @param  base  Number base (default = RAW_BITS = raw bits)
   */
-  void println(char c, int base = RAW_BITS);
+  void println(char c);
 
   /*!
     @brief  Print unsigned byte-size numeric value w/newline to 7-segment
