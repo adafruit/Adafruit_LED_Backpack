@@ -719,7 +719,7 @@ void Adafruit_7segment::writeDigitAscii(uint8_t d, uint8_t c, boolean dot) {
   if (d > 4)
     return;
 
-  uint8_t font = 0x00;  // blank if out of range
+  uint8_t font = 0x00; // blank if out of range
   if (c >= ' ' && c <= 127) {
     font = pgm_read_byte(sevensegfonttable + c - 32);
   }
