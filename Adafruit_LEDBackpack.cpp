@@ -692,7 +692,7 @@ void Adafruit_7segment::writeColon(void) {
   i2c_dev->write(buffer, 3);
 }
 
-void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
+void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, bool dot) {
   if (d > 4 || num > 15)
     return;
 
@@ -723,7 +723,7 @@ void Adafruit_7segment::writeDigitNum(uint8_t d, uint8_t num, boolean dot) {
     writeDigitAscii(d, num + 48, dot); // use ASCII offset
 }
 
-void Adafruit_7segment::writeDigitAscii(uint8_t d, uint8_t c, boolean dot) {
+void Adafruit_7segment::writeDigitAscii(uint8_t d, uint8_t c, bool dot) {
   if (d > 4)
     return;
 
