@@ -327,8 +327,6 @@ void Adafruit_LEDBackpack::end() {
     // turn off oscillator
     uint8_t buffer[1] = {0x20};
     i2c_dev->write(buffer, 1);
-    // terminate I2C communication
-    i2c_dev->end();
   }
 }
 
