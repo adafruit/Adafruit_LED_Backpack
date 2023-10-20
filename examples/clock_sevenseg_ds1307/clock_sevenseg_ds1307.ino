@@ -135,7 +135,7 @@ void loop() {
     clockDisplay.writeDigitNum(1, 0);
     // Also pad when the 10's minute is 0 and should be padded.
     if (minutes < 10) {
-      clockDisplay.writeDigitNum(3, 0);
+      clockDisplay.writeDigitNum(2, 0);
     }
   }
 
