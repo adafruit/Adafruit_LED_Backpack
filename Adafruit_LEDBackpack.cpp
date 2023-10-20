@@ -670,8 +670,15 @@ size_t Adafruit_7segment::write(const char *buffer, size_t size) {
 }
 
 void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
-  if (d > 4)
+  // to skip over index 2 in the displaybuffer, which is the colon
+  if(d > 1) {
+    d += 1;
+  }
+
+  if (d > 4) {
     return;
+  }
+
   displaybuffer[d] = bitmask;
 }
 
