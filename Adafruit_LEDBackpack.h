@@ -362,7 +362,7 @@ public:
 
   /*!
     @brief  Write raw segment bits into display buffer.
-    @param  x        Character position (0-3).
+    @param  x        Character position (0-4), with 2 being the colon.
     @param  bitmask  Segment bits.
   */
   void writeDigitRaw(uint8_t x, uint8_t bitmask);
