@@ -6,8 +6,26 @@
 #include <Adafruit_LEDBackpack.h>
 
 Adafruit_AlphaNum4 alpha4 = Adafruit_AlphaNum4();
-// Defines the animation. For segment names, 
-// see https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
+
+/*
+Segment names for 14-segment alphanumeric displays.
+See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
+
+    -------A-------
+    |\     |     /|
+    | \    J    / |
+    |   H  |  K   |
+    F    \ | /    B
+    |     \|/     |
+    |--G1--|--G2--|
+    |     /|\     |
+    E    / | \    C
+    |   L  |   N  |
+    | /    M    \ |
+    |/     |     \|
+    -------D-------  DP
+*/
+
 uint16_t animation[] { 0, ALPHANUM_SEG_A, 
                        1, ALPHANUM_SEG_H, 
                        1, ALPHANUM_SEG_N, 

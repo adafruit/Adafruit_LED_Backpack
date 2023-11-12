@@ -50,6 +50,25 @@
 
 #define SEVENSEG_DIGITS 5 ///< # Digits in 7-seg displays, plus NUL end
 
+/*
+Segment names for 14-segment alphanumeric displays.
+See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
+
+    -------A-------
+    |\     |     /|
+    | \    J    / |
+    |   H  |  K   |
+    F    \ | /    B
+    |     \|/     |
+    |--G1--|--G2--|
+    |     /|\     |
+    E    / | \    C
+    |   L  |   N  |
+    | /    M    \ |
+    |/     |     \|
+    -------D-------  DP
+*/
+
 #define ALPHANUM_SEG_A 0b0000000000000001  ///< Alphanumeric segment A
 #define ALPHANUM_SEG_B 0b0000000000000010  ///< Alphanumeric segment B
 #define ALPHANUM_SEG_C 0b0000000000000100  ///< Alphanumeric segment C
