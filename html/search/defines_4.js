@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sevenseg_5fdigits',['SEVENSEG_DIGITS',['../_adafruit___l_e_d_backpack_8h.html#a5b377c04c67d8f647cfcf89452074893',1,'Adafruit_LEDBackpack.h']]]
+  ['raw_5fbits',['RAW_BITS',['../_adafruit___l_e_d_backpack_8h.html#af3eac9b77959eeebd391fd17166d55aa',1,'Adafruit_LEDBackpack.h']]]
 ];
