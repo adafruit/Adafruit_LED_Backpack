@@ -26,22 +26,22 @@ See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
     -------D-------  DP
 */
 
-uint16_t animation[] { 0, ALPHANUM_SEG_A, 
-                       1, ALPHANUM_SEG_H, 
-                       1, ALPHANUM_SEG_N, 
-                       2, ALPHANUM_SEG_L, 
-                       2, ALPHANUM_SEG_K, 
-                       3, ALPHANUM_SEG_A, 
-                       3, ALPHANUM_SEG_B, 
-                       3, ALPHANUM_SEG_C, 
-                       3, ALPHANUM_SEG_D, 
-                       2, ALPHANUM_SEG_N,
-                       2, ALPHANUM_SEG_H, 
-                       1, ALPHANUM_SEG_K,
-                       1, ALPHANUM_SEG_L, 
-                       0, ALPHANUM_SEG_D,
-                       0, ALPHANUM_SEG_E,
-                       0, ALPHANUM_SEG_F };
+uint16_t animation[] { 0, ALPHANUM_SEG_A | ALPHANUM_SEG_D, 
+                       1, ALPHANUM_SEG_H | ALPHANUM_SEG_L, 
+                       1, ALPHANUM_SEG_N | ALPHANUM_SEG_K, 
+                       2, ALPHANUM_SEG_L | ALPHANUM_SEG_H, 
+                       2, ALPHANUM_SEG_K | ALPHANUM_SEG_N, 
+                       3, ALPHANUM_SEG_A | ALPHANUM_SEG_D, 
+                       3, ALPHANUM_SEG_B | ALPHANUM_SEG_C, 
+                       3, ALPHANUM_SEG_C | ALPHANUM_SEG_B, 
+                       3, ALPHANUM_SEG_D | ALPHANUM_SEG_A, 
+                       2, ALPHANUM_SEG_N | ALPHANUM_SEG_K,
+                       2, ALPHANUM_SEG_H | ALPHANUM_SEG_L, 
+                       1, ALPHANUM_SEG_K | ALPHANUM_SEG_N,
+                       1, ALPHANUM_SEG_L | ALPHANUM_SEG_H, 
+                       0, ALPHANUM_SEG_D | ALPHANUM_SEG_A,
+                       0, ALPHANUM_SEG_E | ALPHANUM_SEG_F,
+                       0, ALPHANUM_SEG_F | ALPHANUM_SEG_E };
 
 void setup() {
   Serial.begin(9600);  
