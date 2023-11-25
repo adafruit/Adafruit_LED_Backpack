@@ -106,6 +106,12 @@ public:
   bool begin(uint8_t _addr = 0x70, TwoWire *theWire = &Wire);
 
   /*!
+    @brief  Turn display on or off
+    @param  state  State: true = on, false = off
+  */
+  void setState(bool state);
+
+  /*!
     @brief  Set display brightness.
     @param  b  Brightness: 0 (min) to 15 (max).
   */
