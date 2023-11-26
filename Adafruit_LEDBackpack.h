@@ -106,6 +106,12 @@ public:
   bool begin(uint8_t _addr = 0x70, TwoWire *theWire = &Wire);
 
   /*!
+    @brief  Turn display on or off
+    @param  state  State: true = on, false = off
+  */
+  void setDisplayState(bool state);
+
+  /*!
     @brief  Set display brightness.
     @param  b  Brightness: 0 (min) to 15 (max).
   */
@@ -115,7 +121,6 @@ public:
     @brief  Set display blink rate.
     @param  b  One of:
                HT16K33_BLINK_DISPLAYON = steady on
-               HT16K33_BLINK_OFF       = steady off
                HT16K33_BLINK_2HZ       = 2 Hz blink
                HT16K33_BLINK_1HZ       = 1 Hz blink
                HT16K33_BLINK_HALFHZ    = 0.5 Hz blink

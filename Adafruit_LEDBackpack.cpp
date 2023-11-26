@@ -262,6 +262,16 @@ static const PROGMEM uint16_t alphafonttable[] = {
     0b0011111111111111,
 
 };
+
+void Adafruit_LEDBackpack::setDisplayState(bool state) {
+  uint8_t buffer;
+  if (state)
+    buffer = HT16K33_BLINK_CMD | 1;
+  else
+    buffer = HT16K33_BLINK_CMD;
+  i2c_dev->write(&buffer, 1);
+}
+
 void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
   if (b > 15)
     b = 15; // limit to max brightness
