@@ -109,7 +109,7 @@ public:
     @brief  Turn display on or off
     @param  state  State: true = on, false = off
   */
-  void setState(bool state);
+  void setDisplayState(bool state);
 
   /*!
     @brief  Set display brightness.

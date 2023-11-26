@@ -263,7 +263,7 @@ static const PROGMEM uint16_t alphafonttable[] = {
 
 };
 
-void Adafruit_LEDBackpack::setState(bool state) {
+void Adafruit_LEDBackpack::setDisplayState(bool state) {
   uint8_t buffer;
   if (state)
     buffer = HT16K33_BLINK_CMD | 1;
