@@ -137,6 +137,11 @@ public:
   */
   void clear(void);
 
+  /*!
+    @brief Put HT16K33 in standby mode.
+  */
+  void end(void);
+
   uint16_t displaybuffer[8]; ///< Raw display data
 
 protected:

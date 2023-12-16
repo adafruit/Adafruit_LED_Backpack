@@ -332,6 +332,14 @@ void Adafruit_LEDBackpack::clear(void) {
   }
 }
 
+void Adafruit_LEDBackpack::end() {
+  if (i2c_dev) {
+    // turn off oscillator
+    uint8_t buffer[1] = {0x20};
+    i2c_dev->write(buffer, 1);
+  }
+}
+
 /******************************* QUAD ALPHANUM OBJECT */
 
 Adafruit_AlphaNum4::Adafruit_AlphaNum4(void) {}
