@@ -643,24 +643,16 @@ void Adafruit_7segment::println(double n, int digits) {
 void Adafruit_7segment::print(double n, int digits) { printFloat(n, digits); }
 
 size_t Adafruit_7segment::write(char c) {
-
-  uint8_t r = 0;
-
-  if (c == '\n')
-    position = 0;
-  if (c == '\r')
+  if (c == '\n' || c == '\r')
     position = 0;
 
-  if ((c >= ' ') && (c <= 127)) {
-    writeDigitAscii(position, c);
-    r = 1;
-  }
+  writeDigitAscii(position, c);
 
   position++;
   if (position == 2)
     position++;
 
-  return r;
+  return 1;
 }
 
 size_t Adafruit_7segment::write(const char *buffer, size_t size) {
@@ -737,8 +729,10 @@ void Adafruit_7segment::writeDigitAscii(uint8_t d, uint8_t c, bool dot) {
   if (d > 4)
     return;
 
-  uint8_t font = pgm_read_byte(sevensegfonttable + c - 32);
-
+  uint8_t font = 0x00; // blank if out of range
+  if (c >= ' ' && c <= 127) {
+    font = pgm_read_byte(sevensegfonttable + c - 32);
+  }
   writeDigitRaw(d, font | (dot << 7));
 }
 
