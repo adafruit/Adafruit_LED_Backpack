@@ -282,8 +282,7 @@ static const PROGMEM uint16_t alphafonttable[] = {
     0b0000010100100000, // ~
     0b0011111111111111,
 
-    };
-
+};
 
 void Adafruit_LEDBackpack::setDisplayState(bool state) {
   uint8_t buffer;
@@ -309,16 +308,15 @@ void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
-
 bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire *theWire) {
   if (i2c_dev)
     delete i2c_dev;
   i2c_dev = new Adafruit_I2CDevice(_addr, theWire);
   if (!i2c_dev->begin())
     return false;
-  i2c_addr = _addr;
+
   // turn on oscillator
-  uint8_t buffer[1] = {0x21};
+  uint8_t buffer[1] = { 0x21 };
   i2c_dev->write(buffer, 1);
 
   // internal RAM powers up with garbage/random values.
@@ -352,24 +350,23 @@ void Adafruit_LEDBackpack::clear(void) {
 
 // Helper button functions, the data is updated every readSwitches() call!
 
-bool Adafruit_LEDBackpack::isKeyPressed(uint8_t group, uint8_t k) {
-  if (group < 0 or group > 2 or k > 12)
+bool Adafruit_LEDBackpack::isKeyPressed(uint8_t k) {
+  if (k > 39)
     return false;
-  return (keys[group] & _BV(k));
+  return (keys[k >> 4] & _BV(k & 0x0F));
 }
 
-bool Adafruit_LEDBackpack::wasKeyPressed(uint8_t group, uint8_t k) {
-  if (group < 0 or group > 2 or k > 12)
+bool Adafruit_LEDBackpack::wasKeyPressed(uint8_t k) {
+  if (k > 39)
     return false;
-  return (lastkeys[group] & _BV(k));
+  return (lastkeys[k >> 4] & _BV(k & 0x0F));
 }
 
-bool Adafruit_LEDBackpack::justPressed(uint8_t group, uint8_t k) {
-  return (isKeyPressed(group, k) & !wasKeyPressed(group, k));
+bool Adafruit_LEDBackpack::justPressed(uint8_t k) {
+  return (isKeyPressed(k) & !wasKeyPressed(k));
 }
-
-bool Adafruit_LEDBackpack::justReleased(uint8_t group, uint8_t k) {
-  return (!isKeyPressed(group, k) & wasKeyPressed(group, k));
+bool Adafruit_LEDBackpack::justReleased(uint8_t k) {
+  return (!isKeyPressed(k) & wasKeyPressed(k));
 }
 
 bool Adafruit_LEDBackpack::readSwitches(void) {
@@ -380,19 +377,15 @@ bool Adafruit_LEDBackpack::readSwitches(void) {
   Wire.endTransmission();
   Wire.requestFrom((byte)i2c_addr, (byte)6);
   for (uint8_t i = 0; i < 6; i++)
-    _keys[i] = Wire.read();
-  keys[0] = _keys[0] | (_keys[1] & 0x1F) << 8;
-  keys[1] = _keys[2] | (_keys[3] & 0x1F) << 8;
-  keys[2] = _keys[4] | (_keys[5] & 0x1F) << 8;
+    keys[i] = Wire.read();
 
-  for (uint8_t i = 0; i < 3; i++) {
+  for (uint8_t i = 0; i < 6; i++) {
     if (lastkeys[i] != keys[i]) {
-      /* for (uint8_t j = 0; j < 3; j++) {
-         Serial.print("0x");
-         Serial.print(keys[j], HEX);
-         Serial.print(" ");
+      for (uint8_t j = 0; j < 6; j++) {
+        // Serial.print(keys[j], HEX);
+        // Serial.print(" ");
       }
-      Serial.println(); */
+      // Serial.println();
       return true;
     }
   }
@@ -442,16 +435,13 @@ void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
     displaybuffer[c] |= _BV(a);
     // Turn off green LED.
     displaybuffer[c] &= ~_BV(a + 8);
-  }
-  else if (color == LED_YELLOW) {
+  } else if (color == LED_YELLOW) {
     // Turn on red and green LED.
     displaybuffer[c] |= _BV(a) | _BV(a + 8);
-  }
-  else if (color == LED_OFF) {
+  } else if (color == LED_OFF) {
     // Turn off red and green LED.
     displaybuffer[c] &= ~_BV(a) & ~_BV(a + 8);
-  }
-  else if (color == LED_GREEN) {
+  } else if (color == LED_GREEN) {
     // Turn on green LED.
     displaybuffer[c] |= _BV(a + 8);
     // Turn off red LED.
@@ -619,18 +609,15 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
     displaybuffer[y] |= 1 << x;
     // Turn off red LED.
     displaybuffer[y] &= ~(1 << (x + 8));
-  }
-  else if (color == LED_RED) {
+  } else if (color == LED_RED) {
     // Turn on red LED.
     displaybuffer[y] |= 1 << (x + 8);
     // Turn off green LED.
     displaybuffer[y] &= ~(1 << x);
-  }
-  else if (color == LED_YELLOW) {
+  } else if (color == LED_YELLOW) {
     // Turn on green and red LED.
     displaybuffer[y] |= (1 << (x + 8)) | (1 << x);
-  }
-  else if (color == LED_OFF) {
+  } else if (color == LED_OFF) {
     // Turn off green and red LED.
     displaybuffer[y] &= ~(1 << x) & ~(1 << (x + 8));
   }
@@ -640,7 +627,7 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
 Adafruit_7segment::Adafruit_7segment(void) { position = 0; }
 
-void Adafruit_7segment::print(const String &c) { write(c.c_str(), c.length()); }
+void Adafruit_7segment::print(const String& c) { write(c.c_str(), c.length()); }
 
 void Adafruit_7segment::print(const char c[]) { write(c, strlen(c)); }
 
@@ -852,8 +839,8 @@ void Adafruit_7segment::printFloat(double n, uint8_t fracDigits, uint8_t base) {
   }
 
   // did toIntFactor shift the decimal off the display?
-  if (toIntFactor < 1) {
-    printError();
+  if (toIntFactor < 1) { 
+    printError(); 
   } else {
     // otherwise, display the number
     int8_t displayPos = 4;
