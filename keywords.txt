@@ -1,0 +1,62 @@
+#######################################
+# Syntax Coloring Map For Adafruit_LEDBackpack
+#######################################
+# Class
+#######################################
+
+Adafruit_LEDBackpack	KEYWORD1
+Adafruit_24bargraph	KEYWORD1
+Adafruit_8x16matrix	KEYWORD1
+Adafruit_8x16minimatrix	KEYWORD1
+Adafruit_8x8matrix	KEYWORD1
+Adafruit_BicolorMatrix	KEYWORD1
+Adafruit_7segment	KEYWORD1
+Adafruit_AlphaNum4 	KEYWORD1
+
+#######################################
+# Methods and Functions
+#######################################	
+
+begin	KEYWORD2
+setDisplayState	KEYWORD2
+setBrightness	KEYWORD2
+setPixelColor	KEYWORD2
+blinkRate	KEYWORD2
+writeDisplay	KEYWORD2
+clear	KEYWORD2
+isKeyPressed	KEYWORD2
+wasKeyPressed	KEYWORD2
+justPressed	KEYWORD2
+getPixels	KEYWORD2
+justReleased	KEYWORD2
+readSwitches	KEYWORD2
+writeDigitRaw	KEYWORD2
+writeDigitAscii	KEYWORD2
+
+
+#######################################
+# Constants
+#######################################
+
+ALPHANUM_SEG_A	LITERAL1
+ALPHANUM_SEG_B	LITERAL1
+ALPHANUM_SEG_C	LITERAL1
+ALPHANUM_SEG_D	LITERAL1
+ALPHANUM_SEG_E	LITERAL1
+ALPHANUM_SEG_F	LITERAL1
+ALPHANUM_SEG_G1	LITERAL1
+ALPHANUM_SEG_G2	LITERAL1
+ALPHANUM_SEG_H	LITERAL1
+ALPHANUM_SEG_J	LITERAL1
+ALPHANUM_SEG_K	LITERAL1
+ALPHANUM_SEG_L	LITERAL1
+ALPHANUM_SEG_M	LITERAL1
+ALPHANUM_SEG_N	LITERAL1
+ALPHANUM_SEG_DP	LITERAL1
+
+HT16K33_BLINK_CMD	LITERAL1
+HT16K33_BLINK_DISPLAYON	LITERAL1
+HT16K33_BLINK_OFF	LITERAL1
+HT16K33_BLINK_2HZ	LITERAL1
+HT16K33_BLINK_1HZ	LITERAL1
+HT16K33_BLINK_HALFHZ	LITERAL1
