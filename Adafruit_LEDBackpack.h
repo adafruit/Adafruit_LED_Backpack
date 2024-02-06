@@ -88,8 +88,7 @@ See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
 /*!
     @brief  Class encapsulating the raw HT16K33 controller device.
 */
-class Adafruit_LEDBackpack
-{
+class Adafruit_LEDBackpack {
 private:
   uint8_t i2c_addr;
   uint16_t keys[3], lastkeys[3];
@@ -185,8 +184,7 @@ protected:
 /*!
     @brief  Class for 24-element bargraph displays.
 */
-class Adafruit_24bargraph : public Adafruit_LEDBackpack
-{
+class Adafruit_24bargraph : public Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for 24-element bargraph displays.
@@ -204,8 +202,7 @@ public:
 /*!
     @brief  Class for 8x16 pixel single-color matrices.
 */
-class Adafruit_8x16matrix : public Adafruit_LEDBackpack, public Adafruit_GFX
-{
+class Adafruit_8x16matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x16 pixel single-color matrices.
@@ -226,9 +223,8 @@ public:
 /*!
     @brief  Class for 8x16 pixel single-color mini matrices.
 */
-class Adafruit_8x16minimatrix : public Adafruit_LEDBackpack,
-                                public Adafruit_GFX
-{
+class Adafruit_8x16minimatrix : public Adafruit_LEDBackpack, 
+                                public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x16 pixel single-color mini matrices.
@@ -249,8 +245,7 @@ public:
 /*!
     @brief  Class for 8x8 pixel single-color matrices.
 */
-class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX
-{
+class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x8 pixel single-color matrices.
@@ -272,8 +267,7 @@ public:
     @brief  Class for bi-color matrices.
 */
 class Adafruit_BicolorMatrix : public Adafruit_LEDBackpack,
-                               public Adafruit_GFX
-{
+                               public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x8 pixel bi-color matrices.
@@ -296,8 +290,7 @@ public:
 /*!
     @brief  Class for 7-segment numeric displays.
 */
-class Adafruit_7segment : public Adafruit_LEDBackpack
-{
+class Adafruit_7segment : public Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for 7-segment numeric displays.
@@ -508,9 +501,7 @@ private:
 /*!
     @brief  Class for four-digit alphanumeric displays.
 */
-class Adafruit_AlphaNum4 : public Adafruit_LEDBackpack
-{
-
+class Adafruit_AlphaNum4 : public Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for four-digit alphanumeric displays.
