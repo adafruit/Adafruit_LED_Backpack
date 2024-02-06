@@ -493,8 +493,7 @@ void Adafruit_8x16matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
   if (color) {
     displaybuffer[y] |= 1 << x;
-  }
-  else {
+  } else {
     displaybuffer[y] &= ~(1 << x);
   }
 }
@@ -548,8 +547,7 @@ void Adafruit_8x16minimatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
   if (color) {
     displaybuffer[x] |= 1 << y;
-  }
-  else {
+  } else {
     displaybuffer[x] &= ~(1 << y);
   }
 }
@@ -586,8 +584,7 @@ void Adafruit_8x8matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
   if (color) {
     displaybuffer[y] |= 1 << x;
-  }
-  else {
+  } else {
     displaybuffer[y] &= ~(1 << x);
   }
 }
@@ -857,8 +854,7 @@ void Adafruit_7segment::printFloat(double n, uint8_t fracDigits, uint8_t base) {
   // did toIntFactor shift the decimal off the display?
   if (toIntFactor < 1) {
     printError();
-  }
-  else {
+  } else {
     // otherwise, display the number
     int8_t displayPos = 4;
 
