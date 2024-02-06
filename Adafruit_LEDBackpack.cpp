@@ -43,11 +43,11 @@
 #endif
 
 #ifndef _swap_int16_t
-#define _swap_int16_t(a, b) \
-  {                         \
-    int16_t t = a;          \
-    a = b;                  \
-    b = t;                  \
+#define _swap_int16_t(a, b)                                                    \
+  {                                                                            \
+    int16_t t = a;                                                             \
+    a = b;                                                                     \
+    b = t;                                                                     \
   } ///< 16-bit var swap
 #endif
 
@@ -153,38 +153,17 @@ static const PROGMEM uint8_t sevensegfonttable[] = {
 
 static const PROGMEM uint16_t alphafonttable[] = {
 
-    0b0000000000000001,
-    0b0000000000000010,
-    0b0000000000000100,
-    0b0000000000001000,
-    0b0000000000010000,
-    0b0000000000100000,
-    0b0000000001000000,
-    0b0000000010000000,
-    0b0000000100000000,
-    0b0000001000000000,
-    0b0000010000000000,
-    0b0000100000000000,
-    0b0001000000000000,
-    0b0010000000000000,
-    0b0100000000000000,
-    0b1000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0000000000000000,
-    0b0001001011001001,
-    0b0001010111000000,
-    0b0001001011111001,
-    0b0000000011100011,
-    0b0000010100110000,
-    0b0001001011001000,
-    0b0011101000000000,
-    0b0001011100000000,
+    0b0000000000000001, 0b0000000000000010, 0b0000000000000100,
+    0b0000000000001000, 0b0000000000010000, 0b0000000000100000,
+    0b0000000001000000, 0b0000000010000000, 0b0000000100000000,
+    0b0000001000000000, 0b0000010000000000, 0b0000100000000000,
+    0b0001000000000000, 0b0010000000000000, 0b0100000000000000,
+    0b1000000000000000, 0b0000000000000000, 0b0000000000000000,
+    0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
+    0b0000000000000000, 0b0000000000000000, 0b0000000000000000,
+    0b0001001011001001, 0b0001010111000000, 0b0001001011111001,
+    0b0000000011100011, 0b0000010100110000, 0b0001001011001000,
+    0b0011101000000000, 0b0001011100000000,
     0b0000000000000000, //
     0b0000000000000110, // !
     0b0000001000100000, // "
@@ -308,6 +287,7 @@ void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
+
 bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire *theWire) {
   if (i2c_dev)
     delete i2c_dev;
@@ -316,7 +296,7 @@ bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire *theWire) {
     return false;
 
   // turn on oscillator
-  uint8_t buffer[1] = { 0x21 };
+  uint8_t buffer[1] = {0x21};
   i2c_dev->write(buffer, 1);
 
   // internal RAM powers up with garbage/random values.
@@ -325,8 +305,11 @@ bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire *theWire) {
   // when it is turned on.
   clear();
   writeDisplay();
+
   blinkRate(HT16K33_BLINK_OFF);
+
   setBrightness(15); // max brightness
+
   return true;
 }
 
@@ -339,6 +322,7 @@ void Adafruit_LEDBackpack::writeDisplay(void) {
     buffer[1 + 2 * i] = displaybuffer[i] & 0xFF;
     buffer[2 + 2 * i] = displaybuffer[i] >> 8;
   }
+
   i2c_dev->write(buffer, 17);
 }
 
@@ -346,50 +330,6 @@ void Adafruit_LEDBackpack::clear(void) {
   for (uint8_t i = 0; i < 8; i++) {
     displaybuffer[i] = 0;
   }
-}
-
-// Helper button functions, the data is updated every readSwitches() call!
-
-bool Adafruit_LEDBackpack::isKeyPressed(uint8_t k) {
-  if (k > 39)
-    return false;
-  return (keys[k >> 4] & _BV(k & 0x0F));
-}
-
-bool Adafruit_LEDBackpack::wasKeyPressed(uint8_t k) {
-  if (k > 39)
-    return false;
-  return (lastkeys[k >> 4] & _BV(k & 0x0F));
-}
-
-bool Adafruit_LEDBackpack::justPressed(uint8_t k) {
-  return (isKeyPressed(k) & !wasKeyPressed(k));
-}
-bool Adafruit_LEDBackpack::justReleased(uint8_t k) {
-  return (!isKeyPressed(k) & wasKeyPressed(k));
-}
-
-bool Adafruit_LEDBackpack::readSwitches(void) {
-  memcpy(lastkeys, keys, sizeof(keys));
-
-  Wire.beginTransmission((byte)i2c_addr);
-  Wire.write(0x40);
-  Wire.endTransmission();
-  Wire.requestFrom((byte)i2c_addr, (byte)6);
-  for (uint8_t i = 0; i < 6; i++)
-    keys[i] = Wire.read();
-
-  for (uint8_t i = 0; i < 6; i++) {
-    if (lastkeys[i] != keys[i]) {
-      for (uint8_t j = 0; j < 6; j++) {
-        // Serial.print(keys[j], HEX);
-        // Serial.print(" ");
-      }
-      // Serial.println();
-      return true;
-    }
-  }
-  return false;
 }
 
 /******************************* QUAD ALPHANUM OBJECT */
@@ -402,12 +342,15 @@ void Adafruit_AlphaNum4::writeDigitRaw(uint8_t n, uint16_t bitmask) {
 
 void Adafruit_AlphaNum4::writeDigitAscii(uint8_t n, uint8_t a, bool d) {
   uint16_t font = pgm_read_word(alphafonttable + a);
+
   displaybuffer[n] = font;
+
   /*
   Serial.print(a, DEC);
   Serial.print(" / '"); Serial.write(a);
   Serial.print("' = 0x"); Serial.println(font, HEX);
   */
+
   if (d)
     displaybuffer[n] |= (1 << 14);
 }
@@ -627,7 +570,7 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
 Adafruit_7segment::Adafruit_7segment(void) { position = 0; }
 
-void Adafruit_7segment::print(const String& c) { write(c.c_str(), c.length()); }
+void Adafruit_7segment::print(const String &c) { write(c.c_str(), c.length()); }
 
 void Adafruit_7segment::print(const char c[]) { write(c, strlen(c)); }
 
@@ -700,6 +643,7 @@ void Adafruit_7segment::println(double n, int digits) {
 void Adafruit_7segment::print(double n, int digits) { printFloat(n, digits); }
 
 size_t Adafruit_7segment::write(char c) {
+
   uint8_t r = 0;
 
   if (c == '\n')
@@ -839,8 +783,8 @@ void Adafruit_7segment::printFloat(double n, uint8_t fracDigits, uint8_t base) {
   }
 
   // did toIntFactor shift the decimal off the display?
-  if (toIntFactor < 1) { 
-    printError(); 
+  if (toIntFactor < 1) {
+    printError();
   } else {
     // otherwise, display the number
     int8_t displayPos = 4;

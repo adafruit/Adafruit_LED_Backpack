@@ -88,11 +88,7 @@ See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
 /*!
     @brief  Class encapsulating the raw HT16K33 controller device.
 */
-class Adafruit_LEDBackpack
-{
-private:
-  uint8_t keys[6], lastkeys[6];
-
+class Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for HT16K33 devices.
@@ -143,35 +139,6 @@ public:
 
   uint16_t displaybuffer[8]; ///< Raw display data
 
-  /*!
-    @brief  return position of key.
-    @param  k      number of key (0 to 38)
-  */
-  bool isKeyPressed();
-
-  /*!
-    @brief  return previous position of key.
-    @param  k      number of key (0 to 38)
-  */
-  bool wasKeyPressed();
-
-  /*!
-    @brief  true only one time : return OFF -> ON position of key.
-    @param  k      number of key (0 to 38)
-  */
-  bool justPressed();
-
-  /*!
-    @brief  true only one time : return ON -> OFF position of key.
-    @param  k      number of key (0 to 38)
-  */
-  bool justReleased();
-
-  /*!
-    @brief  read all the keys, and return TRUE if one or more keys change.
-  */
-  bool readSwitches();
-
 protected:
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
 };
@@ -179,8 +146,7 @@ protected:
 /*!
     @brief  Class for 24-element bargraph displays.
 */
-class Adafruit_24bargraph : public Adafruit_LEDBackpack
-{
+class Adafruit_24bargraph : public Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for 24-element bargraph displays.
@@ -198,8 +164,7 @@ public:
 /*!
     @brief  Class for 8x16 pixel single-color matrices.
 */
-class Adafruit_8x16matrix : public Adafruit_LEDBackpack, public Adafruit_GFX
-{
+class Adafruit_8x16matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x16 pixel single-color matrices.
@@ -221,8 +186,7 @@ public:
     @brief  Class for 8x16 pixel single-color mini matrices.
 */
 class Adafruit_8x16minimatrix : public Adafruit_LEDBackpack,
-                                public Adafruit_GFX
-{
+                                public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x16 pixel single-color mini matrices.
@@ -243,8 +207,7 @@ public:
 /*!
     @brief  Class for 8x8 pixel single-color matrices.
 */
-class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX
-{
+class Adafruit_8x8matrix : public Adafruit_LEDBackpack, public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x8 pixel single-color matrices.
@@ -266,8 +229,7 @@ public:
     @brief  Class for bi-color matrices.
 */
 class Adafruit_BicolorMatrix : public Adafruit_LEDBackpack,
-                               public Adafruit_GFX
-{
+                               public Adafruit_GFX {
 public:
   /*!
     @brief  Constructor for 8x8 pixel bi-color matrices.
@@ -290,8 +252,7 @@ public:
 /*!
     @brief  Class for 7-segment numeric displays.
 */
-class Adafruit_7segment : public Adafruit_LEDBackpack
-{
+class Adafruit_7segment : public Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for 7-segment numeric displays.
@@ -502,9 +463,7 @@ private:
 /*!
     @brief  Class for four-digit alphanumeric displays.
 */
-class Adafruit_AlphaNum4 : public Adafruit_LEDBackpack
-{
-
+class Adafruit_AlphaNum4 : public Adafruit_LEDBackpack {
 public:
   /*!
     @brief  Constructor for four-digit alphanumeric displays.
