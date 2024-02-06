@@ -281,7 +281,7 @@ static const PROGMEM uint16_t alphafonttable[] = {
     0b0010010010001001, // }
     0b0000010100100000, // ~
     0b0011111111111111 };
-    
+
 
 void Adafruit_LEDBackpack::setDisplayState(bool state) {
   uint8_t buffer;
@@ -307,7 +307,7 @@ void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
-bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire *theWire) {
+bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire* theWire) {
   if (i2c_dev)
     delete i2c_dev;
   i2c_dev = new Adafruit_I2CDevice(_addr, theWire);
@@ -350,14 +350,14 @@ void Adafruit_LEDBackpack::clear(void) {
 // Helper button functions, the data is updated every readSwitches() call!
 
 bool Adafruit_LEDBackpack::isKeyPressed(uint8_t group, uint8_t k) {
-  if (group < 0 or group > 2 or k > 12) 
-      return false;
+  if (group < 0 or group > 2 or k > 12)
+    return false;
   return (keys[group] & _BV(k));
 }
 
 bool Adafruit_LEDBackpack::wasKeyPressed(uint8_t group, uint8_t k) {
-  if (group < 0 or group > 2 or k > 12) 
-      return false;
+  if (group < 0 or group > 2 or k > 12)
+    return false;
   return (lastkeys[group] & _BV(k));
 }
 
@@ -439,13 +439,16 @@ void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
     displaybuffer[c] |= _BV(a);
     // Turn off green LED.
     displaybuffer[c] &= ~_BV(a + 8);
-  } else if (color == LED_YELLOW) {
+  }
+  else if (color == LED_YELLOW) {
     // Turn on red and green LED.
     displaybuffer[c] |= _BV(a) | _BV(a + 8);
-  } else if (color == LED_OFF) {
+  }
+  else if (color == LED_OFF) {
     // Turn off red and green LED.
     displaybuffer[c] &= ~_BV(a) & ~_BV(a + 8);
-  } else if (color == LED_GREEN) {
+  }
+  else if (color == LED_GREEN) {
     // Turn on green LED.
     displaybuffer[c] |= _BV(a + 8);
     // Turn off red LED.
@@ -487,7 +490,8 @@ void Adafruit_8x16matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
   if (color) {
     displaybuffer[y] |= 1 << x;
-  } else {
+  }
+  else {
     displaybuffer[y] &= ~(1 << x);
   }
 }
@@ -541,7 +545,8 @@ void Adafruit_8x16minimatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
   if (color) {
     displaybuffer[x] |= 1 << y;
-  } else {
+  }
+  else {
     displaybuffer[x] &= ~(1 << y);
   }
 }
@@ -578,7 +583,8 @@ void Adafruit_8x8matrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
   if (color) {
     displaybuffer[y] |= 1 << x;
-  } else {
+  }
+  else {
     displaybuffer[y] &= ~(1 << x);
   }
 }
@@ -613,15 +619,18 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
     displaybuffer[y] |= 1 << x;
     // Turn off red LED.
     displaybuffer[y] &= ~(1 << (x + 8));
-  } else if (color == LED_RED) {
+  }
+  else if (color == LED_RED) {
     // Turn on red LED.
     displaybuffer[y] |= 1 << (x + 8);
     // Turn off green LED.
     displaybuffer[y] &= ~(1 << x);
-  } else if (color == LED_YELLOW) {
+  }
+  else if (color == LED_YELLOW) {
     // Turn on green and red LED.
     displaybuffer[y] |= (1 << (x + 8)) | (1 << x);
-  } else if (color == LED_OFF) {
+  }
+  else if (color == LED_OFF) {
     // Turn off green and red LED.
     displaybuffer[y] &= ~(1 << x) & ~(1 << (x + 8));
   }
@@ -631,7 +640,7 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
 Adafruit_7segment::Adafruit_7segment(void) { position = 0; }
 
-void Adafruit_7segment::print(const String &c) { write(c.c_str(), c.length()); }
+void Adafruit_7segment::print(const String& c) { write(c.c_str(), c.length()); }
 
 void Adafruit_7segment::print(const char c[]) { write(c, strlen(c)); }
 
@@ -656,7 +665,7 @@ void Adafruit_7segment::print(unsigned int n, int base) {
 
 void Adafruit_7segment::println(void) { position = 0; }
 
-void Adafruit_7segment::println(const String &c) {
+void Adafruit_7segment::println(const String& c) {
   print(c);
   println();
 }
@@ -723,7 +732,7 @@ size_t Adafruit_7segment::write(char c) {
   return r;
 }
 
-size_t Adafruit_7segment::write(const char *buffer, size_t size) {
+size_t Adafruit_7segment::write(const char* buffer, size_t size) {
   size_t n = 0;
 
   while (n < size) {
@@ -843,9 +852,10 @@ void Adafruit_7segment::printFloat(double n, uint8_t fracDigits, uint8_t base) {
   }
 
   // did toIntFactor shift the decimal off the display?
-  if (toIntFactor < 1) { 
-    printError(); 
-  } else {
+  if (toIntFactor < 1) {
+    printError();
+  }
+  else {
     // otherwise, display the number
     int8_t displayPos = 4;
 
