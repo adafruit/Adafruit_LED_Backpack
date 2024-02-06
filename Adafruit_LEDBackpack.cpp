@@ -640,7 +640,7 @@ void Adafruit_BicolorMatrix::drawPixel(int16_t x, int16_t y, uint16_t color) {
 
 Adafruit_7segment::Adafruit_7segment(void) { position = 0; }
 
-void Adafruit_7segment::print(const String& c) { write(c.c_str(), c.length()); }
+void Adafruit_7segment::print(const String &c) { write(c.c_str(), c.length()); }
 
 void Adafruit_7segment::print(const char c[]) { write(c, strlen(c)); }
 
@@ -665,7 +665,7 @@ void Adafruit_7segment::print(unsigned int n, int base) {
 
 void Adafruit_7segment::println(void) { position = 0; }
 
-void Adafruit_7segment::println(const String& c) {
+void Adafruit_7segment::println(const String &c) {
   print(c);
   println();
 }
@@ -732,7 +732,7 @@ size_t Adafruit_7segment::write(char c) {
   return r;
 }
 
-size_t Adafruit_7segment::write(const char* buffer, size_t size) {
+size_t Adafruit_7segment::write(const char *buffer, size_t size) {
   size_t n = 0;
 
   while (n < size) {
