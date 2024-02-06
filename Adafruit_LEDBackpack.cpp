@@ -385,17 +385,9 @@ bool Adafruit_LEDBackpack::readSwitches(void) {
   keys[1] = _keys[2] | (_keys[3] & 0x1F) << 8;
   keys[2] = _keys[4] | (_keys[5] & 0x1F) << 8;
 
-  for (uint8_t i = 0; i < 3; i++) {
-    if (lastkeys[i] != keys[i]) {
-      /* for (uint8_t j = 0; j < 3; j++) {
-         Serial.print("0x");
-         Serial.print(keys[j], HEX);
-         Serial.print(" ");
-      }
-      Serial.println(); */
+  for (uint8_t i = 0; i < 3; i++)
+    if (lastkeys[i] != keys[i])
       return true;
-    }
-  }
   return false;
 }
 
