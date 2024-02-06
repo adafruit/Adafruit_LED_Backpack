@@ -280,7 +280,9 @@ static const PROGMEM uint16_t alphafonttable[] = {
     0b0001001000000000, // |
     0b0010010010001001, // }
     0b0000010100100000, // ~
-    0b0011111111111111 };
+    0b0011111111111111,
+
+    };
 
 
 void Adafruit_LEDBackpack::setDisplayState(bool state) {
@@ -307,6 +309,7 @@ void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
+
 bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire* theWire) {
   if (i2c_dev)
     delete i2c_dev;
@@ -315,7 +318,7 @@ bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire* theWire) {
     return false;
   i2c_addr = _addr;
   // turn on oscillator
-  uint8_t buffer[1] = { 0x21 };
+  uint8_t buffer[1] = {0x21};
   i2c_dev->write(buffer, 1);
 
   // internal RAM powers up with garbage/random values.
