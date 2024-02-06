@@ -89,6 +89,11 @@ See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
     @brief  Class encapsulating the raw HT16K33 controller device.
 */
 class Adafruit_LEDBackpack {
+private:
+  uint8_t i2c_addr;
+  uint16_t keys[3], lastkeys[3];
+  uint8_t _keys[6];
+
 public:
   /*!
     @brief  Constructor for HT16K33 devices.
@@ -138,6 +143,39 @@ public:
   void clear(void);
 
   uint16_t displaybuffer[8]; ///< Raw display data
+
+  /*!
+    @brief  return position of key.
+    @param  group  0 to 2 of 13 keys    
+    @param  k      number of key (0 to 12)
+  */
+  bool isKeyPressed(uint8_t group, uint8_t k);
+
+  /*!
+    @brief  return previous position of key.
+    @param  group  0 to 2 of 13 keys
+    @param  k      number of key (0 to 12)
+  */
+  bool wasKeyPressed(uint8_t group, uint8_t k);
+
+  /*!
+    @brief  true only one time : return OFF -> ON position of key.
+    @param  group  0 to 2 of 13 keys
+    @param  k      number of key (0 to 12)
+  */
+  bool justPressed(uint8_t group, uint8_t k);
+
+  /*!
+    @brief  true only one time : return ON -> OFF position of key.
+    @param  group  0 to 2 of 13 keys
+    @param  k      number of key (0 to 12)
+  */
+  bool justReleased(uint8_t group, uint8_t k);
+
+  /*!
+    @brief  read all the keys, and return TRUE if one or more keys change.
+  */
+  bool readSwitches();
 
 protected:
   Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
