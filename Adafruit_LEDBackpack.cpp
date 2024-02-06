@@ -661,7 +661,7 @@ void Adafruit_7segment::print(unsigned int n, int base) {
 
 void Adafruit_7segment::println(void) { position = 0; }
 
-void Adafruit_7segment::println(const String& c) {
+void Adafruit_7segment::println(const String &c) {
   print(c);
   println();
 }
