@@ -120,7 +120,7 @@ public:
   /*!
     @brief  Set display blink rate.
     @param  b  One of:
-               HT16K33_BLINK_DISPLAYON = steady on
+               HT16K33_BLINK_OFF       = no blinking
                HT16K33_BLINK_2HZ       = 2 Hz blink
                HT16K33_BLINK_1HZ       = 1 Hz blink
                HT16K33_BLINK_HALFHZ    = 0.5 Hz blink
