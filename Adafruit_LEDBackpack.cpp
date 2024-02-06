@@ -439,16 +439,13 @@ void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
     displaybuffer[c] |= _BV(a);
     // Turn off green LED.
     displaybuffer[c] &= ~_BV(a + 8);
-  }
-  else if (color == LED_YELLOW) {
+  } else if (color == LED_YELLOW) {
     // Turn on red and green LED.
     displaybuffer[c] |= _BV(a) | _BV(a + 8);
-  }
-  else if (color == LED_OFF) {
+  } else if (color == LED_OFF) {
     // Turn off red and green LED.
     displaybuffer[c] &= ~_BV(a) & ~_BV(a + 8);
-  }
-  else if (color == LED_GREEN) {
+  } else if (color == LED_GREEN) {
     // Turn on green LED.
     displaybuffer[c] |= _BV(a + 8);
     // Turn off red LED.
