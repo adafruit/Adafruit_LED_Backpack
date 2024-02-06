@@ -307,7 +307,7 @@ void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
 }
 
 Adafruit_LEDBackpack::Adafruit_LEDBackpack(void) {}
-bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire* theWire) {
+bool Adafruit_LEDBackpack::begin(uint8_t _addr, TwoWire *theWire) {
   if (i2c_dev)
     delete i2c_dev;
   i2c_dev = new Adafruit_I2CDevice(_addr, theWire);
@@ -728,7 +728,7 @@ size_t Adafruit_7segment::write(char c) {
   return r;
 }
 
-size_t Adafruit_7segment::write(const char* buffer, size_t size) {
+size_t Adafruit_7segment::write(const char *buffer, size_t size) {
   size_t n = 0;
 
   while (n < size) {
