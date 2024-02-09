@@ -50,6 +50,41 @@
 
 #define SEVENSEG_DIGITS 5 ///< # Digits in 7-seg displays, plus NUL end
 
+/*
+Segment names for 14-segment alphanumeric displays.
+See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
+
+    -------A-------
+    |\     |     /|
+    | \    J    / |
+    |   H  |  K   |
+    F    \ | /    B
+    |     \|/     |
+    |--G1--|--G2--|
+    |     /|\     |
+    E    / | \    C
+    |   L  |   N  |
+    | /    M    \ |
+    |/     |     \|
+    -------D-------  DP
+*/
+
+#define ALPHANUM_SEG_A 0b0000000000000001  ///< Alphanumeric segment A
+#define ALPHANUM_SEG_B 0b0000000000000010  ///< Alphanumeric segment B
+#define ALPHANUM_SEG_C 0b0000000000000100  ///< Alphanumeric segment C
+#define ALPHANUM_SEG_D 0b0000000000001000  ///< Alphanumeric segment D
+#define ALPHANUM_SEG_E 0b0000000000010000  ///< Alphanumeric segment E
+#define ALPHANUM_SEG_F 0b0000000000100000  ///< Alphanumeric segment F
+#define ALPHANUM_SEG_G1 0b0000000001000000 ///< Alphanumeric segment G1
+#define ALPHANUM_SEG_G2 0b0000000010000000 ///< Alphanumeric segment G2
+#define ALPHANUM_SEG_H 0b0000000100000000  ///< Alphanumeric segment H
+#define ALPHANUM_SEG_J 0b0000001000000000  ///< Alphanumeric segment J
+#define ALPHANUM_SEG_K 0b0000010000000000  ///< Alphanumeric segment K
+#define ALPHANUM_SEG_L 0b0000100000000000  ///< Alphanumeric segment L
+#define ALPHANUM_SEG_M 0b0001000000000000  ///< Alphanumeric segment M
+#define ALPHANUM_SEG_N 0b0010000000000000  ///< Alphanumeric segment N
+#define ALPHANUM_SEG_DP 0b0100000000000000 ///< Alphanumeric segment DP
+
 /*!
     @brief  Class encapsulating the raw HT16K33 controller device.
 */
@@ -71,6 +106,12 @@ public:
   bool begin(uint8_t _addr = 0x70, TwoWire *theWire = &Wire);
 
   /*!
+    @brief  Turn display on or off
+    @param  state  State: true = on, false = off
+  */
+  void setDisplayState(bool state);
+
+  /*!
     @brief  Set display brightness.
     @param  b  Brightness: 0 (min) to 15 (max).
   */
@@ -79,8 +120,7 @@ public:
   /*!
     @brief  Set display blink rate.
     @param  b  One of:
-               HT16K33_BLINK_DISPLAYON = steady on
-               HT16K33_BLINK_OFF       = steady off
+               HT16K33_BLINK_OFF       = no blinking
                HT16K33_BLINK_2HZ       = 2 Hz blink
                HT16K33_BLINK_1HZ       = 1 Hz blink
                HT16K33_BLINK_HALFHZ    = 0.5 Hz blink

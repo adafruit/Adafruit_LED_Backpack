@@ -10,6 +10,9 @@ Atmega328 @ 12MHz |      X       |             |            |
 Atmega32u4 @ 16MHz |      X       |             |            | 
 Atmega32u4 @ 8MHz |      X       |             |            | 
 ESP8266           |      X       |             |            | 
+ESP32             |      X       |             |            |
+ESP32S2           |      X       |             |            |
+ESP32S3           |      X       |             |            |
 Atmega2560 @ 16MHz |      X       |             |            | 
 ATSAM3X8E         |      X       |             |            | Use SDA/SCL on pins 20 &amp; 21
 ATSAM21D          |      X       |             |            | 
@@ -21,6 +24,9 @@ ATtiny85 @ 8MHz   |      X       |             |            | Use 0 for SDA, 2 f
   * ATmega32u4 @ 16MHz : Arduino Leonardo, Arduino Micro, Arduino Yun, Teensy 2.0
   * ATmega32u4 @ 8MHz : Adafruit Flora, Bluefruit Micro
   * ESP8266 : Adafruit Huzzah
+  * ESP32 : Unexpected Maker tinyPICO
+  * ESP32S2 : Unexpected Maker tinyS2
+  * ESP32S3 : Unexpected Maker tinyS3
   * ATmega2560 @ 16MHz : Arduino Mega
   * ATSAM3X8E : Arduino Due
   * ATSAM21D : Arduino Zero, M0 Pro
