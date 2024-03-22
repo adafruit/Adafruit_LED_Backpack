@@ -50,6 +50,16 @@
 
 #define SEVENSEG_DIGITS 5 ///< # Digits in 7-seg displays, plus NUL end
 
+// You have to define ADAFRUIT_USER_DEFINED_FONT to override default font table
+// and define the font table content
+#ifndef ADAFRUIT_USER_DEFINED_FONT     ///< Override default font table
+#define USE_DEFAULT_SEVENSEG_FONTTABLE ///< Use default sevensegfonttable
+#define USE_DEFAULT_ALPHASEG_FONTTABLE ///< Use default alphafonttable
+#else
+extern const PROGMEM uint8_t sevensegfonttable[];
+extern const PROGMEM uint16_t alphafonttable[];
+#endif
+
 /*
 Segment names for 14-segment alphanumeric displays.
 See https://learn.adafruit.com/14-segment-alpha-numeric-led-featherwing/usage
@@ -473,6 +483,13 @@ public:
   /*!
     @brief  Write single character of alphanumeric display as raw bits
             (not a general print function).
+              f-----------
+             a| 7\ 6| 5/ e|
+              9----  8----
+             b| 4/ 3| 2\ d|
+              c----------- 1.
+            The 16 bit digit you pass in for raw image has this mapping:
+            0(=0) 1 2 3 4 5 6 7 8 9 a b c d e f
     @param  n        Character index (0-3).
     @param  bitmask  Segment bitmask.
   */

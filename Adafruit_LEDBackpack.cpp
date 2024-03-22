@@ -51,6 +51,7 @@
   } ///< 16-bit var swap
 #endif
 
+#ifdef USE_DEFAULT_SEVENSEG_FONTTABLE
 static const PROGMEM uint8_t sevensegfonttable[] = {
 
     0b00000000, // (space)
@@ -150,7 +151,9 @@ static const PROGMEM uint8_t sevensegfonttable[] = {
     0b00000001, // ~
     0b00000000, // del
 };
+#endif
 
+#ifdef USE_DEFAULT_ALPHASEG_FONTTABLE
 static const PROGMEM uint16_t alphafonttable[] = {
 
     0b0000000000000001, 0b0000000000000010, 0b0000000000000100,
@@ -262,6 +265,7 @@ static const PROGMEM uint16_t alphafonttable[] = {
     0b0011111111111111,
 
 };
+#endif
 
 void Adafruit_LEDBackpack::setDisplayState(bool state) {
   uint8_t buffer;
