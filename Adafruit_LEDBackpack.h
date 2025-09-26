@@ -430,6 +430,24 @@ public:
   void drawColon(bool state);
 
   /*!
+    @brief  Set or unset upper left dot segment.
+    @param  state  'true' to enable dot, 'false' for off.
+  */
+  void drawUpperDot(bool state);
+
+  /*!
+    @brief  Set or unset lower left dot segment.
+    @param  state  'true' to enable dot, 'false' for off.
+  */
+  void drawLowerDot(bool state);
+
+  /*!
+    @brief  Set or unset degree segment.
+    @param  state  'true' to enable degree, 'false' for off.
+  */
+  void drawDegree(bool state);
+
+  /*!
     @brief  General integer-printing function used by some of the print()
             variants.
     @param  n     Numeric value.

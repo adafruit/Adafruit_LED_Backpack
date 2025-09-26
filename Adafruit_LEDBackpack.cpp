@@ -687,9 +687,30 @@ void Adafruit_7segment::writeDigitRaw(uint8_t d, uint8_t bitmask) {
 
 void Adafruit_7segment::drawColon(bool state) {
   if (state)
-    displaybuffer[2] = 0x2;
+    displaybuffer[2] |= 0x2;
   else
-    displaybuffer[2] = 0;
+    displaybuffer[2] &= ~0x2;
+}
+
+void Adafruit_7segment::drawUpperDot(bool state) {
+  if (state)
+    displaybuffer[2] |= 0x4;
+  else
+    displaybuffer[2] &= ~0x4;
+}
+
+void Adafruit_7segment::drawLowerDot(bool state) {
+  if (state)
+    displaybuffer[2] |= 0x8;
+  else
+    displaybuffer[2] &= ~0x8;
+}
+
+void Adafruit_7segment::drawDegree(bool state) {
+  if (state)
+    displaybuffer[2] |= 0x10;
+  else
+    displaybuffer[2] &= ~0x10;
 }
 
 void Adafruit_7segment::writeColon(void) {
